@@ -6,22 +6,60 @@ grammar programa;
 
 
 
-fragment DIGITO : [0-9];
-fragment PARES: ('0' | '2' | '4' | '6' | '8' );
-FECHA : DIGITO DIGITO'/'(('0' PARES)|('1'('0' | '2' )))'/'DIGITO DIGITO DIGITO DIGITO;
-HORAM : ('0'[8-9]|'1'[0-2])':'[0-5]DIGITO;
-HORAT : ('18:'[3-5]DIGITO|'19:'[0-5]DIGITO|'21:30'|'21:'[0-2]DIGITO|'20:'[0-5]DIGITO);
+//fragment LETRA : [A-Za-z] ;
 
+fragment DIGITO: [0-9];
+LETRA2: [A-Za-z];
+EQ : '=';
+DOUBLE: 'double' ;
+WHILEF: 'while';
+IFF : 'if';
+INT: 'int' ;
+PARENTESISA : '(';
+PARENTESISC : ')';
+LLAVEA: '{';
+LLAVEC: '}';
+PUNTOCOMA: ';';
+COMA: ',';
 
-
-WS : [ \n\t\r] -> skip ;
+ENTERO : DIGITO+ ;
+COMP : ('<'|'<=' |'==' |'>'|'>=' |'!=');
+WS : [ \t\r\n]+ -> skip;
 OTRO : . ->skip;
 
-    s : 
-      FECHA {System.out.println("Linea " + $FECHA.getLine() + " /TIPO DE TOKEN:" + $FECHA.getType() + "  FECHA-> "+ $FECHA.getText()); } s
-    | HORAM {System.out.println("Linea " + $HORAM.getLine() + " /TIPO DE TOKEN:" + $HORAM.getType() + "  HORAM-> "+ $HORAM.getText()); } s
-    | HORAT {System.out.println("Linea " + $HORAT.getLine() + " /TIPO DE TOKEN:" + $HORAT.getType() + "  HORAT-> "+ $HORAT.getText()); } s
+
+programa : 
+    instruccion programa
     |
     ;
 
-   
+instruccion : declaracion  
+            | asignacion 
+            | iwhile 
+            | iif
+            ;
+
+
+iwhile : WHILEF  PARENTESISA variable  COMP  variable  PARENTESISC  LLAVEA  instruccion  LLAVEC;
+iif : IFF PARENTESISA variable COMP variable PARENTESISC LLAVEA instruccion LLAVEC ;
+asignacion : LETRA2  EQ  variable  PUNTOCOMA ;
+//declaracion : type  ( (LETRA2  EQ  ENTERO  (','|';') ) | (LETRA2  (','|';' ) ) )+ ;
+
+declaracion: type declarar
+           ;
+declarar : LETRA2 EQ ENTERO COMA declarar
+         | LETRA2 COMA declarar
+         | LETRA2 EQ ENTERO PUNTOCOMA
+         | LETRA2 PUNTOCOMA
+         ;
+type:DOUBLE
+    | INT
+    ;
+
+variable: LETRA2
+        | ENTERO
+        ;
+
+
+
+//iwhile -> while (x comp y) { instrucciones }

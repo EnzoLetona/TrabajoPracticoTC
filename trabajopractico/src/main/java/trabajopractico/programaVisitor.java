@@ -13,9 +13,57 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link programaParser#s}.
+	 * Visit a parse tree produced by {@link programaParser#programa}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitS(programaParser.SContext ctx);
+	T visitPrograma(programaParser.ProgramaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#instruccion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstruccion(programaParser.InstruccionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#iwhile}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIwhile(programaParser.IwhileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#iif}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIif(programaParser.IifContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#asignacion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsignacion(programaParser.AsignacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declaracion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracion(programaParser.DeclaracionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declarar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarar(programaParser.DeclararContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitType(programaParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(programaParser.VariableContext ctx);
 }
