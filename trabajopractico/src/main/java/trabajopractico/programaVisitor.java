@@ -19,6 +19,12 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrograma(programaParser.ProgramaContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#instrucciones}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstrucciones(programaParser.InstruccionesContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#instruccion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -37,6 +43,12 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIif(programaParser.IifContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#ifor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfor(programaParser.IforContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#asignacion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -54,6 +66,42 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclarar(programaParser.DeclararContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#numerochar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumerochar(programaParser.NumerocharContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declaracionfuncion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#parametros}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParametros(programaParser.ParametrosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#llamadoFuncion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLlamadoFuncion(programaParser.LlamadoFuncionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#concatenacionPalabras}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatenacionPalabras(programaParser.ConcatenacionPalabrasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#definicionFunciones}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#type}.
 	 * @param ctx the parse tree

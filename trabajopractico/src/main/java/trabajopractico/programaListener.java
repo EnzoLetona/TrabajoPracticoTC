@@ -20,6 +20,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitPrograma(programaParser.ProgramaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#instrucciones}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstrucciones(programaParser.InstruccionesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#instrucciones}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstrucciones(programaParser.InstruccionesContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#instruccion}.
 	 * @param ctx the parse tree
 	 */
@@ -50,6 +60,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitIif(programaParser.IifContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#ifor}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfor(programaParser.IforContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#ifor}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfor(programaParser.IforContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#asignacion}.
 	 * @param ctx the parse tree
 	 */
@@ -79,6 +99,66 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclarar(programaParser.DeclararContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#numerochar}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumerochar(programaParser.NumerocharContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#numerochar}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumerochar(programaParser.NumerocharContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#declaracionfuncion}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declaracionfuncion}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#parametros}.
+	 * @param ctx the parse tree
+	 */
+	void enterParametros(programaParser.ParametrosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#parametros}.
+	 * @param ctx the parse tree
+	 */
+	void exitParametros(programaParser.ParametrosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#llamadoFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void enterLlamadoFuncion(programaParser.LlamadoFuncionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#llamadoFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void exitLlamadoFuncion(programaParser.LlamadoFuncionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#concatenacionPalabras}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcatenacionPalabras(programaParser.ConcatenacionPalabrasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#concatenacionPalabras}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcatenacionPalabras(programaParser.ConcatenacionPalabrasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#definicionFunciones}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#definicionFunciones}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#type}.
 	 * @param ctx the parse tree

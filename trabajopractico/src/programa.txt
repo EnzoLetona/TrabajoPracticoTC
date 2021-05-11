@@ -4,14 +4,33 @@ double y;
 int z = 0;
 double w, Q, t, a;
 int a = 5, b, c = 10;
+char tata[15] = " jejeje", tete[], lala[2]="tutu";
 
-x = 1;
+lalalla = 1;
 z = y;
 
 while (x < y) { 
-    x = 1;
+    double y;
 }
 
-iff ( x > 2) {
+if ( x > 2) {
     x = 2;
 }
+
+for(int i = 2, j = 4; i < 4 ; i++){
+    x = 3;
+    int x;
+    int x ;
+    int a = 5, b, c = 10;
+    if ( x > 2) {
+    x = 2;
+    }
+}
+
+
+int precioZZZZ(float base, int impuesto){
+    int x ;
+    int x ;
+    int a = 5, b, c = 10;
+}
+precioZZZZ( base , impuesto);
