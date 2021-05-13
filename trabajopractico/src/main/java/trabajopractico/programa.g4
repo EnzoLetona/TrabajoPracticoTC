@@ -71,9 +71,7 @@ declaracionIndice: type declarar
 indice : PALABRA EQ variable PUNTOCOMA
        | PALABRA EQ variable COMA indice
        ;
-typeFor: type
-       |
-       ;
+
 operador: '++'
         | '--'
         ;

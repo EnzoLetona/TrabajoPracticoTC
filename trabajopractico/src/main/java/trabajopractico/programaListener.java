@@ -90,16 +90,6 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitIndice(programaParser.IndiceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link programaParser#typeFor}.
-	 * @param ctx the parse tree
-	 */
-	void enterTypeFor(programaParser.TypeForContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link programaParser#typeFor}.
-	 * @param ctx the parse tree
-	 */
-	void exitTypeFor(programaParser.TypeForContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 */

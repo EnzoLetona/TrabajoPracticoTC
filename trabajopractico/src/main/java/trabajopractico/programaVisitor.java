@@ -61,12 +61,6 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIndice(programaParser.IndiceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link programaParser#typeFor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTypeFor(programaParser.TypeForContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
