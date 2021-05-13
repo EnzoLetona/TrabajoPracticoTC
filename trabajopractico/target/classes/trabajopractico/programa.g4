@@ -148,7 +148,7 @@ type: DOUBLE
     ;
 //| STRING
 returnss: RETURN variable PUNTOCOMA
-        | RETURN llamadoFuncion PUNTOCOMA
+        | RETURN llamadoFuncion 
         ;
 
 variable: PALABRA

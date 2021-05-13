@@ -17,9 +17,9 @@ while (x < y && y != 5) {
     lalalla = 1 + 3 - 2;
 }
 
-void main (){
+int main (){
 
-
+    return lala(dada);
 }
 
 if ( x == 2 && y < 5) {
@@ -51,6 +51,7 @@ int precioZZZZ(float base, int impuesto){
         }
     }
     return lalala;
+    return 5;
 }
 
 precioZZZZ( base , impuesto);
