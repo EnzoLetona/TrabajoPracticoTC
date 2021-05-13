@@ -90,6 +90,42 @@ public class programaBaseListener implements programaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIndice(programaParser.IndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIndice(programaParser.IndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeFor(programaParser.TypeForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeFor(programaParser.TypeForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOperador(programaParser.OperadorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -258,6 +294,18 @@ public class programaBaseListener implements programaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeFunctions(programaParser.TypeFunctionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeFunctions(programaParser.TypeFunctionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterType(programaParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -265,6 +313,18 @@ public class programaBaseListener implements programaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitType(programaParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnss(programaParser.ReturnssContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnss(programaParser.ReturnssContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

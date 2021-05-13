@@ -70,6 +70,36 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitIfor(programaParser.IforContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#declaracionIndice}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declaracionIndice}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#indice}.
+	 * @param ctx the parse tree
+	 */
+	void enterIndice(programaParser.IndiceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#indice}.
+	 * @param ctx the parse tree
+	 */
+	void exitIndice(programaParser.IndiceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#typeFor}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeFor(programaParser.TypeForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#typeFor}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeFor(programaParser.TypeForContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 */
@@ -210,6 +240,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#typeFunctions}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeFunctions(programaParser.TypeFunctionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#typeFunctions}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeFunctions(programaParser.TypeFunctionsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#type}.
 	 * @param ctx the parse tree
 	 */
@@ -219,6 +259,16 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitType(programaParser.TypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#returnss}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnss(programaParser.ReturnssContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#returnss}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnss(programaParser.ReturnssContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#variable}.
 	 * @param ctx the parse tree

@@ -49,6 +49,24 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfor(programaParser.IforContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#declaracionIndice}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#indice}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIndice(programaParser.IndiceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#typeFor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeFor(programaParser.TypeForContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -133,11 +151,23 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#typeFunctions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeFunctions(programaParser.TypeFunctionsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitType(programaParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#returnss}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnss(programaParser.ReturnssContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#variable}.
 	 * @param ctx the parse tree

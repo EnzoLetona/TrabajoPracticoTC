@@ -17,9 +17,11 @@ IFF : 'if';
 FORR: 'for';
 INT: 'int' ;
 STRING: 'string';
+VOID: 'void';
 CHAR: 'char';
 FLOAT: 'float';
 COMILLAS: '"';
+RETURN: 'return';
 PARENTESISA : '(';
 PARENTESISC : ')';
 LLAVEA: '{';
@@ -51,21 +53,32 @@ instruccion : declaracion
             | ifor
             | declaracionfuncion
             | definicionFunciones 
-            | operacionesaritlogicas 
+            | operacionesaritlogicas
+            | llamadoFuncion
+            | returnss 
             ;
 
 // IF FOR Y WHILE
 
-iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instrucciones  LLAVEC;
-iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ;
-ifor : FORR PARENTESISA declaracion PALABRA COMP variable PUNTOCOMA operador PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC;
+iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instrucciones  LLAVEC; //check
+iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ; //check
+ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC; 
 
+declaracionIndice: typeFor indice;
+
+indice : PALABRA EQ variable PUNTOCOMA
+       | PALABRA EQ variable COMA indice
+       ;
+typeFor: INT
+       | DOUBLE
+       | FLOAT
+       |
+       ;
 operador: '++'
         | '--'
-        |
         ;
 // ------------------------------------------------------------------------------------------------------------------------------------
-asignacion : PALABRA  EQ  variable operacion PUNTOCOMA ;
+asignacion : PALABRA  EQ  variable operacion PUNTOCOMA ; // check
 operacion: operadores variable operacion
          | operadores variable 
          |
@@ -77,7 +90,7 @@ operadores: MAS
         | DIVISION
         ;
 // ------------------------------------------------------------------------------------------------------------------------------------
-operacionesaritlogicas : variable COMP variable '&&' operacionesaritlogicas 
+operacionesaritlogicas : variable COMP variable operadorLogico operacionesaritlogicas //check
                        | variable COMP variable 
                        ;
 
@@ -89,11 +102,11 @@ operadorLogico : '&&'
 
 //declaracion : type  ( (PALABRA  EQ  ENTERO  (','|';') ) | (PALABRA  (','|';' ) ) )+ ;
 
-declaracion: type declarar
+declaracion: type declarar //check
            ;
-declarar : PALABRA EQ ENTERO COMA declarar
+declarar : PALABRA EQ variable COMA declarar
          | PALABRA COMA declarar
-         | PALABRA EQ ENTERO PUNTOCOMA
+         | PALABRA EQ variable PUNTOCOMA
          | PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS COMA declarar
          | PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
          | PALABRA '['numerochar']' COMA declarar
@@ -108,7 +121,7 @@ numerochar : ENTERO
            ;
 
 /* DECLARACION DE FUNCIONES Y LLAMADOS */
-declaracionfuncion: type PALABRA PARENTESISA parametros PARENTESISC PUNTOCOMA
+declaracionfuncion: typeFunctions PALABRA PARENTESISA parametros PARENTESISC PUNTOCOMA
                   ;
 
 parametros: type PALABRA COMA parametros
@@ -122,15 +135,21 @@ concatenacionPalabras: PALABRA COMA concatenacionPalabras
                      |
                      ;
 
-definicionFunciones: type PALABRA PARENTESISA parametros PARENTESISC LLAVEA instrucciones LLAVEC ;
+definicionFunciones: typeFunctions PALABRA PARENTESISA parametros PARENTESISC LLAVEA instrucciones LLAVEC ;
+typeFunctions : type
+              | VOID
+              ;
 //----------------------------------------------------------------------------
 type: DOUBLE
     | INT  
     | CHAR
     | FLOAT
-    |
     ;
 //| STRING
+returnss: RETURN variable PUNTOCOMA
+        | RETURN llamadoFuncion PUNTOCOMA
+        ;
+
 variable: PALABRA
         | ENTERO
         ;

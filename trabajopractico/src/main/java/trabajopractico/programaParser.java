@@ -20,24 +20,27 @@ public class programaParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, EQ=7, DOUBLE=8, WHILEF=9, 
-		IFF=10, FORR=11, INT=12, STRING=13, CHAR=14, FLOAT=15, COMILLAS=16, PARENTESISA=17, 
-		PARENTESISC=18, LLAVEA=19, LLAVEC=20, PUNTOCOMA=21, MAS=22, MENOS=23, 
-		PRODUCTO=24, DIVISION=25, COMA=26, PALABRA=27, ENTERO=28, COMP=29, WS=30, 
-		OTRO=31;
+		IFF=10, FORR=11, INT=12, STRING=13, VOID=14, CHAR=15, FLOAT=16, COMILLAS=17, 
+		RETURN=18, PARENTESISA=19, PARENTESISC=20, LLAVEA=21, LLAVEC=22, PUNTOCOMA=23, 
+		MAS=24, MENOS=25, PRODUCTO=26, DIVISION=27, COMA=28, PALABRA=29, ENTERO=30, 
+		COMP=31, WS=32, OTRO=33;
 	public static final int
 		RULE_programa = 0, RULE_instrucciones = 1, RULE_instruccion = 2, RULE_iwhile = 3, 
-		RULE_iif = 4, RULE_ifor = 5, RULE_operador = 6, RULE_asignacion = 7, RULE_operacion = 8, 
-		RULE_operadores = 9, RULE_operacionesaritlogicas = 10, RULE_operadorLogico = 11, 
-		RULE_declaracion = 12, RULE_declarar = 13, RULE_numerochar = 14, RULE_declaracionfuncion = 15, 
-		RULE_parametros = 16, RULE_llamadoFuncion = 17, RULE_concatenacionPalabras = 18, 
-		RULE_definicionFunciones = 19, RULE_type = 20, RULE_variable = 21;
+		RULE_iif = 4, RULE_ifor = 5, RULE_declaracionIndice = 6, RULE_indice = 7, 
+		RULE_typeFor = 8, RULE_operador = 9, RULE_asignacion = 10, RULE_operacion = 11, 
+		RULE_operadores = 12, RULE_operacionesaritlogicas = 13, RULE_operadorLogico = 14, 
+		RULE_declaracion = 15, RULE_declarar = 16, RULE_numerochar = 17, RULE_declaracionfuncion = 18, 
+		RULE_parametros = 19, RULE_llamadoFuncion = 20, RULE_concatenacionPalabras = 21, 
+		RULE_definicionFunciones = 22, RULE_typeFunctions = 23, RULE_type = 24, 
+		RULE_returnss = 25, RULE_variable = 26;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"programa", "instrucciones", "instruccion", "iwhile", "iif", "ifor", 
-			"operador", "asignacion", "operacion", "operadores", "operacionesaritlogicas", 
-			"operadorLogico", "declaracion", "declarar", "numerochar", "declaracionfuncion", 
-			"parametros", "llamadoFuncion", "concatenacionPalabras", "definicionFunciones", 
-			"type", "variable"
+			"declaracionIndice", "indice", "typeFor", "operador", "asignacion", "operacion", 
+			"operadores", "operacionesaritlogicas", "operadorLogico", "declaracion", 
+			"declarar", "numerochar", "declaracionfuncion", "parametros", "llamadoFuncion", 
+			"concatenacionPalabras", "definicionFunciones", "typeFunctions", "type", 
+			"returnss", "variable"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -45,18 +48,19 @@ public class programaParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'++'", "'--'", "'&&'", "'||'", "'['", "']'", "'='", "'double'", 
-			"'while'", "'if'", "'for'", "'int'", "'string'", "'char'", "'float'", 
-			"'\"'", "'('", "')'", "'{'", "'}'", "';'", "'+'", "'-'", "'*'", "'/'", 
-			"','"
+			"'while'", "'if'", "'for'", "'int'", "'string'", "'void'", "'char'", 
+			"'float'", "'\"'", "'return'", "'('", "')'", "'{'", "'}'", "';'", "'+'", 
+			"'-'", "'*'", "'/'", "','"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, "EQ", "DOUBLE", "WHILEF", "IFF", 
-			"FORR", "INT", "STRING", "CHAR", "FLOAT", "COMILLAS", "PARENTESISA", 
-			"PARENTESISC", "LLAVEA", "LLAVEC", "PUNTOCOMA", "MAS", "MENOS", "PRODUCTO", 
-			"DIVISION", "COMA", "PALABRA", "ENTERO", "COMP", "WS", "OTRO"
+			"FORR", "INT", "STRING", "VOID", "CHAR", "FLOAT", "COMILLAS", "RETURN", 
+			"PARENTESISA", "PARENTESISC", "LLAVEA", "LLAVEC", "PUNTOCOMA", "MAS", 
+			"MENOS", "PRODUCTO", "DIVISION", "COMA", "PALABRA", "ENTERO", "COMP", 
+			"WS", "OTRO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -139,7 +143,7 @@ public class programaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
+			setState(54);
 			instrucciones();
 			}
 		}
@@ -184,7 +188,7 @@ public class programaParser extends Parser {
 		InstruccionesContext _localctx = new InstruccionesContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_instrucciones);
 		try {
-			setState(50);
+			setState(60);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case DOUBLE:
@@ -192,15 +196,17 @@ public class programaParser extends Parser {
 			case IFF:
 			case FORR:
 			case INT:
+			case VOID:
 			case CHAR:
 			case FLOAT:
+			case RETURN:
 			case PALABRA:
 			case ENTERO:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(46);
+				setState(56);
 				instruccion();
-				setState(47);
+				setState(57);
 				instrucciones();
 				}
 				break;
@@ -250,6 +256,12 @@ public class programaParser extends Parser {
 		public OperacionesaritlogicasContext operacionesaritlogicas() {
 			return getRuleContext(OperacionesaritlogicasContext.class,0);
 		}
+		public LlamadoFuncionContext llamadoFuncion() {
+			return getRuleContext(LlamadoFuncionContext.class,0);
+		}
+		public ReturnssContext returnss() {
+			return getRuleContext(ReturnssContext.class,0);
+		}
 		public InstruccionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -273,63 +285,77 @@ public class programaParser extends Parser {
 		InstruccionContext _localctx = new InstruccionContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_instruccion);
 		try {
-			setState(60);
+			setState(72);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(52);
+				setState(62);
 				declaracion();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(53);
+				setState(63);
 				asignacion();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(54);
+				setState(64);
 				iwhile();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(55);
+				setState(65);
 				iif();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(56);
+				setState(66);
 				ifor();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(57);
+				setState(67);
 				declaracionfuncion();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(58);
+				setState(68);
 				definicionFunciones();
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(59);
+				setState(69);
 				operacionesaritlogicas();
+				}
+				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(70);
+				llamadoFuncion();
+				}
+				break;
+			case 10:
+				enterOuterAlt(_localctx, 10);
+				{
+				setState(71);
+				returnss();
 				}
 				break;
 			}
@@ -382,19 +408,19 @@ public class programaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(74);
 			match(WHILEF);
-			setState(63);
+			setState(75);
 			match(PARENTESISA);
-			setState(64);
+			setState(76);
 			operacionesaritlogicas();
-			setState(65);
+			setState(77);
 			match(PARENTESISC);
-			setState(66);
+			setState(78);
 			match(LLAVEA);
-			setState(67);
+			setState(79);
 			instrucciones();
-			setState(68);
+			setState(80);
 			match(LLAVEC);
 			}
 		}
@@ -446,19 +472,19 @@ public class programaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
+			setState(82);
 			match(IFF);
-			setState(71);
+			setState(83);
 			match(PARENTESISA);
-			setState(72);
+			setState(84);
 			operacionesaritlogicas();
-			setState(73);
+			setState(85);
 			match(PARENTESISC);
-			setState(74);
+			setState(86);
 			match(LLAVEA);
-			setState(75);
+			setState(87);
 			instrucciones();
-			setState(76);
+			setState(88);
 			match(LLAVEC);
 			}
 		}
@@ -476,8 +502,8 @@ public class programaParser extends Parser {
 	public static class IforContext extends ParserRuleContext {
 		public TerminalNode FORR() { return getToken(programaParser.FORR, 0); }
 		public TerminalNode PARENTESISA() { return getToken(programaParser.PARENTESISA, 0); }
-		public DeclaracionContext declaracion() {
-			return getRuleContext(DeclaracionContext.class,0);
+		public DeclaracionIndiceContext declaracionIndice() {
+			return getRuleContext(DeclaracionIndiceContext.class,0);
 		}
 		public List<TerminalNode> PALABRA() { return getTokens(programaParser.PALABRA); }
 		public TerminalNode PALABRA(int i) {
@@ -488,11 +514,8 @@ public class programaParser extends Parser {
 			return getRuleContext(VariableContext.class,0);
 		}
 		public TerminalNode PUNTOCOMA() { return getToken(programaParser.PUNTOCOMA, 0); }
-		public List<OperadorContext> operador() {
-			return getRuleContexts(OperadorContext.class);
-		}
-		public OperadorContext operador(int i) {
-			return getRuleContext(OperadorContext.class,i);
+		public OperadorContext operador() {
+			return getRuleContext(OperadorContext.class,0);
 		}
 		public TerminalNode PARENTESISC() { return getToken(programaParser.PARENTESISC, 0); }
 		public TerminalNode LLAVEA() { return getToken(programaParser.LLAVEA, 0); }
@@ -525,34 +548,230 @@ public class programaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
-			match(FORR);
-			setState(79);
-			match(PARENTESISA);
-			setState(80);
-			declaracion();
-			setState(81);
-			match(PALABRA);
-			setState(82);
-			match(COMP);
-			setState(83);
-			variable();
-			setState(84);
-			match(PUNTOCOMA);
-			setState(85);
-			operador();
-			setState(86);
-			match(PALABRA);
-			setState(87);
-			operador();
-			setState(88);
-			match(PARENTESISC);
-			setState(89);
-			match(LLAVEA);
 			setState(90);
-			instrucciones();
+			match(FORR);
 			setState(91);
+			match(PARENTESISA);
+			setState(92);
+			declaracionIndice();
+			setState(93);
+			match(PALABRA);
+			setState(94);
+			match(COMP);
+			setState(95);
+			variable();
+			setState(96);
+			match(PUNTOCOMA);
+			setState(97);
+			match(PALABRA);
+			setState(98);
+			operador();
+			setState(99);
+			match(PARENTESISC);
+			setState(100);
+			match(LLAVEA);
+			setState(101);
+			instrucciones();
+			setState(102);
 			match(LLAVEC);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class DeclaracionIndiceContext extends ParserRuleContext {
+		public TypeForContext typeFor() {
+			return getRuleContext(TypeForContext.class,0);
+		}
+		public IndiceContext indice() {
+			return getRuleContext(IndiceContext.class,0);
+		}
+		public DeclaracionIndiceContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_declaracionIndice; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).enterDeclaracionIndice(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).exitDeclaracionIndice(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof programaVisitor ) return ((programaVisitor<? extends T>)visitor).visitDeclaracionIndice(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DeclaracionIndiceContext declaracionIndice() throws RecognitionException {
+		DeclaracionIndiceContext _localctx = new DeclaracionIndiceContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_declaracionIndice);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(104);
+			typeFor();
+			setState(105);
+			indice();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class IndiceContext extends ParserRuleContext {
+		public TerminalNode PALABRA() { return getToken(programaParser.PALABRA, 0); }
+		public TerminalNode EQ() { return getToken(programaParser.EQ, 0); }
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
+		public TerminalNode PUNTOCOMA() { return getToken(programaParser.PUNTOCOMA, 0); }
+		public TerminalNode COMA() { return getToken(programaParser.COMA, 0); }
+		public IndiceContext indice() {
+			return getRuleContext(IndiceContext.class,0);
+		}
+		public IndiceContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_indice; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).enterIndice(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).exitIndice(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof programaVisitor ) return ((programaVisitor<? extends T>)visitor).visitIndice(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final IndiceContext indice() throws RecognitionException {
+		IndiceContext _localctx = new IndiceContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_indice);
+		try {
+			setState(118);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(107);
+				match(PALABRA);
+				setState(108);
+				match(EQ);
+				setState(109);
+				variable();
+				setState(110);
+				match(PUNTOCOMA);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(112);
+				match(PALABRA);
+				setState(113);
+				match(EQ);
+				setState(114);
+				variable();
+				setState(115);
+				match(COMA);
+				setState(116);
+				indice();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class TypeForContext extends ParserRuleContext {
+		public TerminalNode INT() { return getToken(programaParser.INT, 0); }
+		public TerminalNode DOUBLE() { return getToken(programaParser.DOUBLE, 0); }
+		public TerminalNode FLOAT() { return getToken(programaParser.FLOAT, 0); }
+		public TypeForContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_typeFor; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).enterTypeFor(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).exitTypeFor(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof programaVisitor ) return ((programaVisitor<? extends T>)visitor).visitTypeFor(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final TypeForContext typeFor() throws RecognitionException {
+		TypeForContext _localctx = new TypeForContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_typeFor);
+		try {
+			setState(124);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case INT:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(120);
+				match(INT);
+				}
+				break;
+			case DOUBLE:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(121);
+				match(DOUBLE);
+				}
+				break;
+			case FLOAT:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(122);
+				match(FLOAT);
+				}
+				break;
+			case PALABRA:
+				enterOuterAlt(_localctx, 4);
+				{
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -588,33 +807,21 @@ public class programaParser extends Parser {
 
 	public final OperadorContext operador() throws RecognitionException {
 		OperadorContext _localctx = new OperadorContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_operador);
+		enterRule(_localctx, 18, RULE_operador);
+		int _la;
 		try {
-			setState(96);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__0:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(93);
-				match(T__0);
-				}
-				break;
-			case T__1:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(94);
-				match(T__1);
-				}
-				break;
-			case PARENTESISC:
-			case PALABRA:
-				enterOuterAlt(_localctx, 3);
-				{
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(126);
+			_la = _input.LA(1);
+			if ( !(_la==T__0 || _la==T__1) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -659,19 +866,19 @@ public class programaParser extends Parser {
 
 	public final AsignacionContext asignacion() throws RecognitionException {
 		AsignacionContext _localctx = new AsignacionContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_asignacion);
+		enterRule(_localctx, 20, RULE_asignacion);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(128);
 			match(PALABRA);
-			setState(99);
+			setState(129);
 			match(EQ);
-			setState(100);
+			setState(130);
 			variable();
-			setState(101);
+			setState(131);
 			operacion();
-			setState(102);
+			setState(132);
 			match(PUNTOCOMA);
 			}
 		}
@@ -717,28 +924,28 @@ public class programaParser extends Parser {
 
 	public final OperacionContext operacion() throws RecognitionException {
 		OperacionContext _localctx = new OperacionContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_operacion);
+		enterRule(_localctx, 22, RULE_operacion);
 		try {
-			setState(112);
+			setState(142);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(104);
+				setState(134);
 				operadores();
-				setState(105);
+				setState(135);
 				variable();
-				setState(106);
+				setState(136);
 				operacion();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(108);
+				setState(138);
 				operadores();
-				setState(109);
+				setState(139);
 				variable();
 				}
 				break;
@@ -786,12 +993,12 @@ public class programaParser extends Parser {
 
 	public final OperadoresContext operadores() throws RecognitionException {
 		OperadoresContext _localctx = new OperadoresContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_operadores);
+		enterRule(_localctx, 24, RULE_operadores);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(114);
+			setState(144);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MAS) | (1L << MENOS) | (1L << PRODUCTO) | (1L << DIVISION))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -822,6 +1029,9 @@ public class programaParser extends Parser {
 			return getRuleContext(VariableContext.class,i);
 		}
 		public TerminalNode COMP() { return getToken(programaParser.COMP, 0); }
+		public OperadorLogicoContext operadorLogico() {
+			return getRuleContext(OperadorLogicoContext.class,0);
+		}
 		public OperacionesaritlogicasContext operacionesaritlogicas() {
 			return getRuleContext(OperacionesaritlogicasContext.class,0);
 		}
@@ -846,34 +1056,34 @@ public class programaParser extends Parser {
 
 	public final OperacionesaritlogicasContext operacionesaritlogicas() throws RecognitionException {
 		OperacionesaritlogicasContext _localctx = new OperacionesaritlogicasContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_operacionesaritlogicas);
+		enterRule(_localctx, 26, RULE_operacionesaritlogicas);
 		try {
-			setState(126);
+			setState(156);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(116);
+				setState(146);
 				variable();
-				setState(117);
+				setState(147);
 				match(COMP);
-				setState(118);
+				setState(148);
 				variable();
-				setState(119);
-				match(T__2);
-				setState(120);
+				setState(149);
+				operadorLogico();
+				setState(150);
 				operacionesaritlogicas();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(122);
+				setState(152);
 				variable();
-				setState(123);
+				setState(153);
 				match(COMP);
-				setState(124);
+				setState(154);
 				variable();
 				}
 				break;
@@ -912,12 +1122,12 @@ public class programaParser extends Parser {
 
 	public final OperadorLogicoContext operadorLogico() throws RecognitionException {
 		OperadorLogicoContext _localctx = new OperadorLogicoContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_operadorLogico);
+		enterRule(_localctx, 28, RULE_operadorLogico);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(128);
+			setState(158);
 			_la = _input.LA(1);
 			if ( !(_la==T__2 || _la==T__3) ) {
 			_errHandler.recoverInline(this);
@@ -968,13 +1178,13 @@ public class programaParser extends Parser {
 
 	public final DeclaracionContext declaracion() throws RecognitionException {
 		DeclaracionContext _localctx = new DeclaracionContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_declaracion);
+		enterRule(_localctx, 30, RULE_declaracion);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(130);
+			setState(160);
 			type();
-			setState(131);
+			setState(161);
 			declarar();
 			}
 		}
@@ -995,7 +1205,9 @@ public class programaParser extends Parser {
 			return getToken(programaParser.PALABRA, i);
 		}
 		public TerminalNode EQ() { return getToken(programaParser.EQ, 0); }
-		public TerminalNode ENTERO() { return getToken(programaParser.ENTERO, 0); }
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
 		public TerminalNode COMA() { return getToken(programaParser.COMA, 0); }
 		public DeclararContext declarar() {
 			return getRuleContext(DeclararContext.class,0);
@@ -1029,136 +1241,136 @@ public class programaParser extends Parser {
 
 	public final DeclararContext declarar() throws RecognitionException {
 		DeclararContext _localctx = new DeclararContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_declarar);
+		enterRule(_localctx, 32, RULE_declarar);
 		try {
-			setState(181);
+			setState(213);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(133);
+				setState(163);
 				match(PALABRA);
-				setState(134);
+				setState(164);
 				match(EQ);
-				setState(135);
-				match(ENTERO);
-				setState(136);
+				setState(165);
+				variable();
+				setState(166);
 				match(COMA);
-				setState(137);
+				setState(167);
 				declarar();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(138);
-				match(PALABRA);
-				setState(139);
-				match(COMA);
-				setState(140);
-				declarar();
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(141);
-				match(PALABRA);
-				setState(142);
-				match(EQ);
-				setState(143);
-				match(ENTERO);
-				setState(144);
-				match(PUNTOCOMA);
-				}
-				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(145);
-				match(PALABRA);
-				setState(146);
-				match(T__4);
-				setState(147);
-				numerochar();
-				setState(148);
-				match(T__5);
-				setState(149);
-				match(EQ);
-				setState(150);
-				match(COMILLAS);
-				setState(151);
-				match(PALABRA);
-				setState(152);
-				match(COMILLAS);
-				setState(153);
-				match(COMA);
-				setState(154);
-				declarar();
-				}
-				break;
-			case 5:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(156);
-				match(PALABRA);
-				setState(157);
-				match(T__4);
-				setState(158);
-				numerochar();
-				setState(159);
-				match(T__5);
-				setState(160);
-				match(EQ);
-				setState(161);
-				match(COMILLAS);
-				setState(162);
-				match(PALABRA);
-				setState(163);
-				match(COMILLAS);
-				setState(164);
-				match(PUNTOCOMA);
-				}
-				break;
-			case 6:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(166);
-				match(PALABRA);
-				setState(167);
-				match(T__4);
-				setState(168);
-				numerochar();
 				setState(169);
-				match(T__5);
+				match(PALABRA);
 				setState(170);
 				match(COMA);
 				setState(171);
 				declarar();
 				}
 				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(172);
+				match(PALABRA);
+				setState(173);
+				match(EQ);
+				setState(174);
+				variable();
+				setState(175);
+				match(PUNTOCOMA);
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(177);
+				match(PALABRA);
+				setState(178);
+				match(T__4);
+				setState(179);
+				numerochar();
+				setState(180);
+				match(T__5);
+				setState(181);
+				match(EQ);
+				setState(182);
+				match(COMILLAS);
+				setState(183);
+				match(PALABRA);
+				setState(184);
+				match(COMILLAS);
+				setState(185);
+				match(COMA);
+				setState(186);
+				declarar();
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(188);
+				match(PALABRA);
+				setState(189);
+				match(T__4);
+				setState(190);
+				numerochar();
+				setState(191);
+				match(T__5);
+				setState(192);
+				match(EQ);
+				setState(193);
+				match(COMILLAS);
+				setState(194);
+				match(PALABRA);
+				setState(195);
+				match(COMILLAS);
+				setState(196);
+				match(PUNTOCOMA);
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(198);
+				match(PALABRA);
+				setState(199);
+				match(T__4);
+				setState(200);
+				numerochar();
+				setState(201);
+				match(T__5);
+				setState(202);
+				match(COMA);
+				setState(203);
+				declarar();
+				}
+				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(173);
+				setState(205);
 				match(PALABRA);
-				setState(174);
+				setState(206);
 				match(T__4);
-				setState(175);
+				setState(207);
 				numerochar();
-				setState(176);
+				setState(208);
 				match(T__5);
-				setState(177);
+				setState(209);
 				match(PUNTOCOMA);
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(179);
+				setState(211);
 				match(PALABRA);
-				setState(180);
+				setState(212);
 				match(PUNTOCOMA);
 				}
 				break;
@@ -1199,22 +1411,22 @@ public class programaParser extends Parser {
 
 	public final NumerocharContext numerochar() throws RecognitionException {
 		NumerocharContext _localctx = new NumerocharContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_numerochar);
+		enterRule(_localctx, 34, RULE_numerochar);
 		try {
-			setState(186);
+			setState(218);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ENTERO:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(183);
+				setState(215);
 				match(ENTERO);
 				}
 				break;
 			case PALABRA:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(184);
+				setState(216);
 				match(PALABRA);
 				}
 				break;
@@ -1239,8 +1451,8 @@ public class programaParser extends Parser {
 	}
 
 	public static class DeclaracionfuncionContext extends ParserRuleContext {
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
+		public TypeFunctionsContext typeFunctions() {
+			return getRuleContext(TypeFunctionsContext.class,0);
 		}
 		public TerminalNode PALABRA() { return getToken(programaParser.PALABRA, 0); }
 		public TerminalNode PARENTESISA() { return getToken(programaParser.PARENTESISA, 0); }
@@ -1270,21 +1482,21 @@ public class programaParser extends Parser {
 
 	public final DeclaracionfuncionContext declaracionfuncion() throws RecognitionException {
 		DeclaracionfuncionContext _localctx = new DeclaracionfuncionContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_declaracionfuncion);
+		enterRule(_localctx, 36, RULE_declaracionfuncion);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(188);
-			type();
-			setState(189);
+			setState(220);
+			typeFunctions();
+			setState(221);
 			match(PALABRA);
-			setState(190);
+			setState(222);
 			match(PARENTESISA);
-			setState(191);
+			setState(223);
 			parametros();
-			setState(192);
+			setState(224);
 			match(PARENTESISC);
-			setState(193);
+			setState(225);
 			match(PUNTOCOMA);
 			}
 		}
@@ -1329,30 +1541,30 @@ public class programaParser extends Parser {
 
 	public final ParametrosContext parametros() throws RecognitionException {
 		ParametrosContext _localctx = new ParametrosContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_parametros);
+		enterRule(_localctx, 38, RULE_parametros);
 		try {
-			setState(204);
+			setState(236);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(195);
+				setState(227);
 				type();
-				setState(196);
+				setState(228);
 				match(PALABRA);
-				setState(197);
+				setState(229);
 				match(COMA);
-				setState(198);
+				setState(230);
 				parametros();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(200);
+				setState(232);
 				type();
-				setState(201);
+				setState(233);
 				match(PALABRA);
 				}
 				break;
@@ -1403,19 +1615,19 @@ public class programaParser extends Parser {
 
 	public final LlamadoFuncionContext llamadoFuncion() throws RecognitionException {
 		LlamadoFuncionContext _localctx = new LlamadoFuncionContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_llamadoFuncion);
+		enterRule(_localctx, 40, RULE_llamadoFuncion);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(206);
+			setState(238);
 			match(PALABRA);
-			setState(207);
+			setState(239);
 			match(PARENTESISA);
-			setState(208);
+			setState(240);
 			concatenacionPalabras();
-			setState(209);
+			setState(241);
 			match(PARENTESISC);
-			setState(210);
+			setState(242);
 			match(PUNTOCOMA);
 			}
 		}
@@ -1457,26 +1669,26 @@ public class programaParser extends Parser {
 
 	public final ConcatenacionPalabrasContext concatenacionPalabras() throws RecognitionException {
 		ConcatenacionPalabrasContext _localctx = new ConcatenacionPalabrasContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_concatenacionPalabras);
+		enterRule(_localctx, 42, RULE_concatenacionPalabras);
 		try {
-			setState(217);
+			setState(249);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(212);
+				setState(244);
 				match(PALABRA);
-				setState(213);
+				setState(245);
 				match(COMA);
-				setState(214);
+				setState(246);
 				concatenacionPalabras();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(215);
+				setState(247);
 				match(PALABRA);
 				}
 				break;
@@ -1499,8 +1711,8 @@ public class programaParser extends Parser {
 	}
 
 	public static class DefinicionFuncionesContext extends ParserRuleContext {
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
+		public TypeFunctionsContext typeFunctions() {
+			return getRuleContext(TypeFunctionsContext.class,0);
 		}
 		public TerminalNode PALABRA() { return getToken(programaParser.PALABRA, 0); }
 		public TerminalNode PARENTESISA() { return getToken(programaParser.PARENTESISA, 0); }
@@ -1534,26 +1746,89 @@ public class programaParser extends Parser {
 
 	public final DefinicionFuncionesContext definicionFunciones() throws RecognitionException {
 		DefinicionFuncionesContext _localctx = new DefinicionFuncionesContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_definicionFunciones);
+		enterRule(_localctx, 44, RULE_definicionFunciones);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(219);
-			type();
-			setState(220);
+			setState(251);
+			typeFunctions();
+			setState(252);
 			match(PALABRA);
-			setState(221);
+			setState(253);
 			match(PARENTESISA);
-			setState(222);
+			setState(254);
 			parametros();
-			setState(223);
+			setState(255);
 			match(PARENTESISC);
-			setState(224);
+			setState(256);
 			match(LLAVEA);
-			setState(225);
+			setState(257);
 			instrucciones();
-			setState(226);
+			setState(258);
 			match(LLAVEC);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class TypeFunctionsContext extends ParserRuleContext {
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode VOID() { return getToken(programaParser.VOID, 0); }
+		public TypeFunctionsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_typeFunctions; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).enterTypeFunctions(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).exitTypeFunctions(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof programaVisitor ) return ((programaVisitor<? extends T>)visitor).visitTypeFunctions(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final TypeFunctionsContext typeFunctions() throws RecognitionException {
+		TypeFunctionsContext _localctx = new TypeFunctionsContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_typeFunctions);
+		try {
+			setState(262);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case DOUBLE:
+			case INT:
+			case CHAR:
+			case FLOAT:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(260);
+				type();
+				}
+				break;
+			case VOID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(261);
+				match(VOID);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1593,46 +1868,91 @@ public class programaParser extends Parser {
 
 	public final TypeContext type() throws RecognitionException {
 		TypeContext _localctx = new TypeContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_type);
+		enterRule(_localctx, 48, RULE_type);
+		int _la;
 		try {
-			setState(233);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(264);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DOUBLE) | (1L << INT) | (1L << CHAR) | (1L << FLOAT))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ReturnssContext extends ParserRuleContext {
+		public TerminalNode RETURN() { return getToken(programaParser.RETURN, 0); }
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
+		public TerminalNode PUNTOCOMA() { return getToken(programaParser.PUNTOCOMA, 0); }
+		public LlamadoFuncionContext llamadoFuncion() {
+			return getRuleContext(LlamadoFuncionContext.class,0);
+		}
+		public ReturnssContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_returnss; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).enterReturnss(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof programaListener ) ((programaListener)listener).exitReturnss(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof programaVisitor ) return ((programaVisitor<? extends T>)visitor).visitReturnss(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ReturnssContext returnss() throws RecognitionException {
+		ReturnssContext _localctx = new ReturnssContext(_ctx, getState());
+		enterRule(_localctx, 50, RULE_returnss);
+		try {
+			setState(274);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case DOUBLE:
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(228);
-				match(DOUBLE);
+				setState(266);
+				match(RETURN);
+				setState(267);
+				variable();
+				setState(268);
+				match(PUNTOCOMA);
 				}
 				break;
-			case INT:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(229);
-				match(INT);
+				setState(270);
+				match(RETURN);
+				setState(271);
+				llamadoFuncion();
+				setState(272);
+				match(PUNTOCOMA);
 				}
 				break;
-			case CHAR:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(230);
-				match(CHAR);
-				}
-				break;
-			case FLOAT:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(231);
-				match(FLOAT);
-				}
-				break;
-			case PALABRA:
-				enterOuterAlt(_localctx, 5);
-				{
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1670,12 +1990,12 @@ public class programaParser extends Parser {
 
 	public final VariableContext variable() throws RecognitionException {
 		VariableContext _localctx = new VariableContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_variable);
+		enterRule(_localctx, 52, RULE_variable);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(235);
+			setState(276);
 			_la = _input.LA(1);
 			if ( !(_la==PALABRA || _la==ENTERO) ) {
 			_errHandler.recoverInline(this);
@@ -1699,82 +2019,97 @@ public class programaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!\u00f0\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u0119\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2\3\3\3\3\3\3"+
-		"\3\3\5\3\65\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4?\n\4\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\5\bc\n\b\3\t\3\t"+
-		"\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\ns\n\n\3\13\3\13\3"+
-		"\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f\u0081\n\f\3\r\3\r\3\16\3\16"+
-		"\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u00b8\n\17\3\20\3\20\3\20\5\20"+
-		"\u00bd\n\20\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22"+
-		"\3\22\3\22\3\22\3\22\5\22\u00cf\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\24"+
-		"\3\24\3\24\3\24\3\24\5\24\u00dc\n\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25"+
-		"\3\25\3\25\3\26\3\26\3\26\3\26\3\26\5\26\u00ec\n\26\3\27\3\27\3\27\2\2"+
-		"\30\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,\2\5\3\2\30\33\3\2\5"+
-		"\6\3\2\35\36\2\u00f7\2.\3\2\2\2\4\64\3\2\2\2\6>\3\2\2\2\b@\3\2\2\2\nH"+
-		"\3\2\2\2\fP\3\2\2\2\16b\3\2\2\2\20d\3\2\2\2\22r\3\2\2\2\24t\3\2\2\2\26"+
-		"\u0080\3\2\2\2\30\u0082\3\2\2\2\32\u0084\3\2\2\2\34\u00b7\3\2\2\2\36\u00bc"+
-		"\3\2\2\2 \u00be\3\2\2\2\"\u00ce\3\2\2\2$\u00d0\3\2\2\2&\u00db\3\2\2\2"+
-		"(\u00dd\3\2\2\2*\u00eb\3\2\2\2,\u00ed\3\2\2\2./\5\4\3\2/\3\3\2\2\2\60"+
-		"\61\5\6\4\2\61\62\5\4\3\2\62\65\3\2\2\2\63\65\3\2\2\2\64\60\3\2\2\2\64"+
-		"\63\3\2\2\2\65\5\3\2\2\2\66?\5\32\16\2\67?\5\20\t\28?\5\b\5\29?\5\n\6"+
-		"\2:?\5\f\7\2;?\5 \21\2<?\5(\25\2=?\5\26\f\2>\66\3\2\2\2>\67\3\2\2\2>8"+
-		"\3\2\2\2>9\3\2\2\2>:\3\2\2\2>;\3\2\2\2><\3\2\2\2>=\3\2\2\2?\7\3\2\2\2"+
-		"@A\7\13\2\2AB\7\23\2\2BC\5\26\f\2CD\7\24\2\2DE\7\25\2\2EF\5\4\3\2FG\7"+
-		"\26\2\2G\t\3\2\2\2HI\7\f\2\2IJ\7\23\2\2JK\5\26\f\2KL\7\24\2\2LM\7\25\2"+
-		"\2MN\5\4\3\2NO\7\26\2\2O\13\3\2\2\2PQ\7\r\2\2QR\7\23\2\2RS\5\32\16\2S"+
-		"T\7\35\2\2TU\7\37\2\2UV\5,\27\2VW\7\27\2\2WX\5\16\b\2XY\7\35\2\2YZ\5\16"+
-		"\b\2Z[\7\24\2\2[\\\7\25\2\2\\]\5\4\3\2]^\7\26\2\2^\r\3\2\2\2_c\7\3\2\2"+
-		"`c\7\4\2\2ac\3\2\2\2b_\3\2\2\2b`\3\2\2\2ba\3\2\2\2c\17\3\2\2\2de\7\35"+
-		"\2\2ef\7\t\2\2fg\5,\27\2gh\5\22\n\2hi\7\27\2\2i\21\3\2\2\2jk\5\24\13\2"+
-		"kl\5,\27\2lm\5\22\n\2ms\3\2\2\2no\5\24\13\2op\5,\27\2ps\3\2\2\2qs\3\2"+
-		"\2\2rj\3\2\2\2rn\3\2\2\2rq\3\2\2\2s\23\3\2\2\2tu\t\2\2\2u\25\3\2\2\2v"+
-		"w\5,\27\2wx\7\37\2\2xy\5,\27\2yz\7\5\2\2z{\5\26\f\2{\u0081\3\2\2\2|}\5"+
-		",\27\2}~\7\37\2\2~\177\5,\27\2\177\u0081\3\2\2\2\u0080v\3\2\2\2\u0080"+
-		"|\3\2\2\2\u0081\27\3\2\2\2\u0082\u0083\t\3\2\2\u0083\31\3\2\2\2\u0084"+
-		"\u0085\5*\26\2\u0085\u0086\5\34\17\2\u0086\33\3\2\2\2\u0087\u0088\7\35"+
-		"\2\2\u0088\u0089\7\t\2\2\u0089\u008a\7\36\2\2\u008a\u008b\7\34\2\2\u008b"+
-		"\u00b8\5\34\17\2\u008c\u008d\7\35\2\2\u008d\u008e\7\34\2\2\u008e\u00b8"+
-		"\5\34\17\2\u008f\u0090\7\35\2\2\u0090\u0091\7\t\2\2\u0091\u0092\7\36\2"+
-		"\2\u0092\u00b8\7\27\2\2\u0093\u0094\7\35\2\2\u0094\u0095\7\7\2\2\u0095"+
-		"\u0096\5\36\20\2\u0096\u0097\7\b\2\2\u0097\u0098\7\t\2\2\u0098\u0099\7"+
-		"\22\2\2\u0099\u009a\7\35\2\2\u009a\u009b\7\22\2\2\u009b\u009c\7\34\2\2"+
-		"\u009c\u009d\5\34\17\2\u009d\u00b8\3\2\2\2\u009e\u009f\7\35\2\2\u009f"+
-		"\u00a0\7\7\2\2\u00a0\u00a1\5\36\20\2\u00a1\u00a2\7\b\2\2\u00a2\u00a3\7"+
-		"\t\2\2\u00a3\u00a4\7\22\2\2\u00a4\u00a5\7\35\2\2\u00a5\u00a6\7\22\2\2"+
-		"\u00a6\u00a7\7\27\2\2\u00a7\u00b8\3\2\2\2\u00a8\u00a9\7\35\2\2\u00a9\u00aa"+
-		"\7\7\2\2\u00aa\u00ab\5\36\20\2\u00ab\u00ac\7\b\2\2\u00ac\u00ad\7\34\2"+
-		"\2\u00ad\u00ae\5\34\17\2\u00ae\u00b8\3\2\2\2\u00af\u00b0\7\35\2\2\u00b0"+
-		"\u00b1\7\7\2\2\u00b1\u00b2\5\36\20\2\u00b2\u00b3\7\b\2\2\u00b3\u00b4\7"+
-		"\27\2\2\u00b4\u00b8\3\2\2\2\u00b5\u00b6\7\35\2\2\u00b6\u00b8\7\27\2\2"+
-		"\u00b7\u0087\3\2\2\2\u00b7\u008c\3\2\2\2\u00b7\u008f\3\2\2\2\u00b7\u0093"+
-		"\3\2\2\2\u00b7\u009e\3\2\2\2\u00b7\u00a8\3\2\2\2\u00b7\u00af\3\2\2\2\u00b7"+
-		"\u00b5\3\2\2\2\u00b8\35\3\2\2\2\u00b9\u00bd\7\36\2\2\u00ba\u00bd\7\35"+
-		"\2\2\u00bb\u00bd\3\2\2\2\u00bc\u00b9\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc"+
-		"\u00bb\3\2\2\2\u00bd\37\3\2\2\2\u00be\u00bf\5*\26\2\u00bf\u00c0\7\35\2"+
-		"\2\u00c0\u00c1\7\23\2\2\u00c1\u00c2\5\"\22\2\u00c2\u00c3\7\24\2\2\u00c3"+
-		"\u00c4\7\27\2\2\u00c4!\3\2\2\2\u00c5\u00c6\5*\26\2\u00c6\u00c7\7\35\2"+
-		"\2\u00c7\u00c8\7\34\2\2\u00c8\u00c9\5\"\22\2\u00c9\u00cf\3\2\2\2\u00ca"+
-		"\u00cb\5*\26\2\u00cb\u00cc\7\35\2\2\u00cc\u00cf\3\2\2\2\u00cd\u00cf\3"+
-		"\2\2\2\u00ce\u00c5\3\2\2\2\u00ce\u00ca\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf"+
-		"#\3\2\2\2\u00d0\u00d1\7\35\2\2\u00d1\u00d2\7\23\2\2\u00d2\u00d3\5&\24"+
-		"\2\u00d3\u00d4\7\24\2\2\u00d4\u00d5\7\27\2\2\u00d5%\3\2\2\2\u00d6\u00d7"+
-		"\7\35\2\2\u00d7\u00d8\7\34\2\2\u00d8\u00dc\5&\24\2\u00d9\u00dc\7\35\2"+
-		"\2\u00da\u00dc\3\2\2\2\u00db\u00d6\3\2\2\2\u00db\u00d9\3\2\2\2\u00db\u00da"+
-		"\3\2\2\2\u00dc\'\3\2\2\2\u00dd\u00de\5*\26\2\u00de\u00df\7\35\2\2\u00df"+
-		"\u00e0\7\23\2\2\u00e0\u00e1\5\"\22\2\u00e1\u00e2\7\24\2\2\u00e2\u00e3"+
-		"\7\25\2\2\u00e3\u00e4\5\4\3\2\u00e4\u00e5\7\26\2\2\u00e5)\3\2\2\2\u00e6"+
-		"\u00ec\7\n\2\2\u00e7\u00ec\7\16\2\2\u00e8\u00ec\7\20\2\2\u00e9\u00ec\7"+
-		"\21\2\2\u00ea\u00ec\3\2\2\2\u00eb\u00e6\3\2\2\2\u00eb\u00e7\3\2\2\2\u00eb"+
-		"\u00e8\3\2\2\2\u00eb\u00e9\3\2\2\2\u00eb\u00ea\3\2\2\2\u00ec+\3\2\2\2"+
-		"\u00ed\u00ee\t\4\2\2\u00ee-\3\2\2\2\f\64>br\u0080\u00b7\u00bc\u00ce\u00db"+
-		"\u00eb";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
+		"\4\32\t\32\4\33\t\33\4\34\t\34\3\2\3\2\3\3\3\3\3\3\3\3\5\3?\n\3\3\4\3"+
+		"\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4K\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3"+
+		"\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
+		"\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
+		"\t\3\t\3\t\5\ty\n\t\3\n\3\n\3\n\3\n\5\n\177\n\n\3\13\3\13\3\f\3\f\3\f"+
+		"\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u0091\n\r\3\16\3\16\3"+
+		"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u009f\n\17\3\20"+
+		"\3\20\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22"+
+		"\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22"+
+		"\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22"+
+		"\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00d8"+
+		"\n\22\3\23\3\23\3\23\5\23\u00dd\n\23\3\24\3\24\3\24\3\24\3\24\3\24\3\24"+
+		"\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\5\25\u00ef\n\25\3\26\3\26"+
+		"\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\5\27\u00fc\n\27\3\30\3\30"+
+		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\31\3\31\5\31\u0109\n\31\3\32\3\32"+
+		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\5\33\u0115\n\33\3\34\3\34\3\34"+
+		"\2\2\35\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66\2"+
+		"\7\3\2\3\4\3\2\32\35\3\2\5\6\5\2\n\n\16\16\21\22\3\2\37 \2\u011d\28\3"+
+		"\2\2\2\4>\3\2\2\2\6J\3\2\2\2\bL\3\2\2\2\nT\3\2\2\2\f\\\3\2\2\2\16j\3\2"+
+		"\2\2\20x\3\2\2\2\22~\3\2\2\2\24\u0080\3\2\2\2\26\u0082\3\2\2\2\30\u0090"+
+		"\3\2\2\2\32\u0092\3\2\2\2\34\u009e\3\2\2\2\36\u00a0\3\2\2\2 \u00a2\3\2"+
+		"\2\2\"\u00d7\3\2\2\2$\u00dc\3\2\2\2&\u00de\3\2\2\2(\u00ee\3\2\2\2*\u00f0"+
+		"\3\2\2\2,\u00fb\3\2\2\2.\u00fd\3\2\2\2\60\u0108\3\2\2\2\62\u010a\3\2\2"+
+		"\2\64\u0114\3\2\2\2\66\u0116\3\2\2\289\5\4\3\29\3\3\2\2\2:;\5\6\4\2;<"+
+		"\5\4\3\2<?\3\2\2\2=?\3\2\2\2>:\3\2\2\2>=\3\2\2\2?\5\3\2\2\2@K\5 \21\2"+
+		"AK\5\26\f\2BK\5\b\5\2CK\5\n\6\2DK\5\f\7\2EK\5&\24\2FK\5.\30\2GK\5\34\17"+
+		"\2HK\5*\26\2IK\5\64\33\2J@\3\2\2\2JA\3\2\2\2JB\3\2\2\2JC\3\2\2\2JD\3\2"+
+		"\2\2JE\3\2\2\2JF\3\2\2\2JG\3\2\2\2JH\3\2\2\2JI\3\2\2\2K\7\3\2\2\2LM\7"+
+		"\13\2\2MN\7\25\2\2NO\5\34\17\2OP\7\26\2\2PQ\7\27\2\2QR\5\4\3\2RS\7\30"+
+		"\2\2S\t\3\2\2\2TU\7\f\2\2UV\7\25\2\2VW\5\34\17\2WX\7\26\2\2XY\7\27\2\2"+
+		"YZ\5\4\3\2Z[\7\30\2\2[\13\3\2\2\2\\]\7\r\2\2]^\7\25\2\2^_\5\16\b\2_`\7"+
+		"\37\2\2`a\7!\2\2ab\5\66\34\2bc\7\31\2\2cd\7\37\2\2de\5\24\13\2ef\7\26"+
+		"\2\2fg\7\27\2\2gh\5\4\3\2hi\7\30\2\2i\r\3\2\2\2jk\5\22\n\2kl\5\20\t\2"+
+		"l\17\3\2\2\2mn\7\37\2\2no\7\t\2\2op\5\66\34\2pq\7\31\2\2qy\3\2\2\2rs\7"+
+		"\37\2\2st\7\t\2\2tu\5\66\34\2uv\7\36\2\2vw\5\20\t\2wy\3\2\2\2xm\3\2\2"+
+		"\2xr\3\2\2\2y\21\3\2\2\2z\177\7\16\2\2{\177\7\n\2\2|\177\7\22\2\2}\177"+
+		"\3\2\2\2~z\3\2\2\2~{\3\2\2\2~|\3\2\2\2~}\3\2\2\2\177\23\3\2\2\2\u0080"+
+		"\u0081\t\2\2\2\u0081\25\3\2\2\2\u0082\u0083\7\37\2\2\u0083\u0084\7\t\2"+
+		"\2\u0084\u0085\5\66\34\2\u0085\u0086\5\30\r\2\u0086\u0087\7\31\2\2\u0087"+
+		"\27\3\2\2\2\u0088\u0089\5\32\16\2\u0089\u008a\5\66\34\2\u008a\u008b\5"+
+		"\30\r\2\u008b\u0091\3\2\2\2\u008c\u008d\5\32\16\2\u008d\u008e\5\66\34"+
+		"\2\u008e\u0091\3\2\2\2\u008f\u0091\3\2\2\2\u0090\u0088\3\2\2\2\u0090\u008c"+
+		"\3\2\2\2\u0090\u008f\3\2\2\2\u0091\31\3\2\2\2\u0092\u0093\t\3\2\2\u0093"+
+		"\33\3\2\2\2\u0094\u0095\5\66\34\2\u0095\u0096\7!\2\2\u0096\u0097\5\66"+
+		"\34\2\u0097\u0098\5\36\20\2\u0098\u0099\5\34\17\2\u0099\u009f\3\2\2\2"+
+		"\u009a\u009b\5\66\34\2\u009b\u009c\7!\2\2\u009c\u009d\5\66\34\2\u009d"+
+		"\u009f\3\2\2\2\u009e\u0094\3\2\2\2\u009e\u009a\3\2\2\2\u009f\35\3\2\2"+
+		"\2\u00a0\u00a1\t\4\2\2\u00a1\37\3\2\2\2\u00a2\u00a3\5\62\32\2\u00a3\u00a4"+
+		"\5\"\22\2\u00a4!\3\2\2\2\u00a5\u00a6\7\37\2\2\u00a6\u00a7\7\t\2\2\u00a7"+
+		"\u00a8\5\66\34\2\u00a8\u00a9\7\36\2\2\u00a9\u00aa\5\"\22\2\u00aa\u00d8"+
+		"\3\2\2\2\u00ab\u00ac\7\37\2\2\u00ac\u00ad\7\36\2\2\u00ad\u00d8\5\"\22"+
+		"\2\u00ae\u00af\7\37\2\2\u00af\u00b0\7\t\2\2\u00b0\u00b1\5\66\34\2\u00b1"+
+		"\u00b2\7\31\2\2\u00b2\u00d8\3\2\2\2\u00b3\u00b4\7\37\2\2\u00b4\u00b5\7"+
+		"\7\2\2\u00b5\u00b6\5$\23\2\u00b6\u00b7\7\b\2\2\u00b7\u00b8\7\t\2\2\u00b8"+
+		"\u00b9\7\23\2\2\u00b9\u00ba\7\37\2\2\u00ba\u00bb\7\23\2\2\u00bb\u00bc"+
+		"\7\36\2\2\u00bc\u00bd\5\"\22\2\u00bd\u00d8\3\2\2\2\u00be\u00bf\7\37\2"+
+		"\2\u00bf\u00c0\7\7\2\2\u00c0\u00c1\5$\23\2\u00c1\u00c2\7\b\2\2\u00c2\u00c3"+
+		"\7\t\2\2\u00c3\u00c4\7\23\2\2\u00c4\u00c5\7\37\2\2\u00c5\u00c6\7\23\2"+
+		"\2\u00c6\u00c7\7\31\2\2\u00c7\u00d8\3\2\2\2\u00c8\u00c9\7\37\2\2\u00c9"+
+		"\u00ca\7\7\2\2\u00ca\u00cb\5$\23\2\u00cb\u00cc\7\b\2\2\u00cc\u00cd\7\36"+
+		"\2\2\u00cd\u00ce\5\"\22\2\u00ce\u00d8\3\2\2\2\u00cf\u00d0\7\37\2\2\u00d0"+
+		"\u00d1\7\7\2\2\u00d1\u00d2\5$\23\2\u00d2\u00d3\7\b\2\2\u00d3\u00d4\7\31"+
+		"\2\2\u00d4\u00d8\3\2\2\2\u00d5\u00d6\7\37\2\2\u00d6\u00d8\7\31\2\2\u00d7"+
+		"\u00a5\3\2\2\2\u00d7\u00ab\3\2\2\2\u00d7\u00ae\3\2\2\2\u00d7\u00b3\3\2"+
+		"\2\2\u00d7\u00be\3\2\2\2\u00d7\u00c8\3\2\2\2\u00d7\u00cf\3\2\2\2\u00d7"+
+		"\u00d5\3\2\2\2\u00d8#\3\2\2\2\u00d9\u00dd\7 \2\2\u00da\u00dd\7\37\2\2"+
+		"\u00db\u00dd\3\2\2\2\u00dc\u00d9\3\2\2\2\u00dc\u00da\3\2\2\2\u00dc\u00db"+
+		"\3\2\2\2\u00dd%\3\2\2\2\u00de\u00df\5\60\31\2\u00df\u00e0\7\37\2\2\u00e0"+
+		"\u00e1\7\25\2\2\u00e1\u00e2\5(\25\2\u00e2\u00e3\7\26\2\2\u00e3\u00e4\7"+
+		"\31\2\2\u00e4\'\3\2\2\2\u00e5\u00e6\5\62\32\2\u00e6\u00e7\7\37\2\2\u00e7"+
+		"\u00e8\7\36\2\2\u00e8\u00e9\5(\25\2\u00e9\u00ef\3\2\2\2\u00ea\u00eb\5"+
+		"\62\32\2\u00eb\u00ec\7\37\2\2\u00ec\u00ef\3\2\2\2\u00ed\u00ef\3\2\2\2"+
+		"\u00ee\u00e5\3\2\2\2\u00ee\u00ea\3\2\2\2\u00ee\u00ed\3\2\2\2\u00ef)\3"+
+		"\2\2\2\u00f0\u00f1\7\37\2\2\u00f1\u00f2\7\25\2\2\u00f2\u00f3\5,\27\2\u00f3"+
+		"\u00f4\7\26\2\2\u00f4\u00f5\7\31\2\2\u00f5+\3\2\2\2\u00f6\u00f7\7\37\2"+
+		"\2\u00f7\u00f8\7\36\2\2\u00f8\u00fc\5,\27\2\u00f9\u00fc\7\37\2\2\u00fa"+
+		"\u00fc\3\2\2\2\u00fb\u00f6\3\2\2\2\u00fb\u00f9\3\2\2\2\u00fb\u00fa\3\2"+
+		"\2\2\u00fc-\3\2\2\2\u00fd\u00fe\5\60\31\2\u00fe\u00ff\7\37\2\2\u00ff\u0100"+
+		"\7\25\2\2\u0100\u0101\5(\25\2\u0101\u0102\7\26\2\2\u0102\u0103\7\27\2"+
+		"\2\u0103\u0104\5\4\3\2\u0104\u0105\7\30\2\2\u0105/\3\2\2\2\u0106\u0109"+
+		"\5\62\32\2\u0107\u0109\7\20\2\2\u0108\u0106\3\2\2\2\u0108\u0107\3\2\2"+
+		"\2\u0109\61\3\2\2\2\u010a\u010b\t\5\2\2\u010b\63\3\2\2\2\u010c\u010d\7"+
+		"\24\2\2\u010d\u010e\5\66\34\2\u010e\u010f\7\31\2\2\u010f\u0115\3\2\2\2"+
+		"\u0110\u0111\7\24\2\2\u0111\u0112\5*\26\2\u0112\u0113\7\31\2\2\u0113\u0115"+
+		"\3\2\2\2\u0114\u010c\3\2\2\2\u0114\u0110\3\2\2\2\u0115\65\3\2\2\2\u0116"+
+		"\u0117\t\6\2\2\u0117\67\3\2\2\2\16>Jx~\u0090\u009e\u00d7\u00dc\u00ee\u00fb"+
+		"\u0108\u0114";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
