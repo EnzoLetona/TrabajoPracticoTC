@@ -49,11 +49,41 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfor(programaParser.IforContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#operador}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperador(programaParser.OperadorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#asignacion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAsignacion(programaParser.AsignacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#operacion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperacion(programaParser.OperacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#operadores}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperadores(programaParser.OperadoresContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#operacionesaritlogicas}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperacionesaritlogicas(programaParser.OperacionesaritlogicasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#operadorLogico}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperadorLogico(programaParser.OperadorLogicoContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#declaracion}.
 	 * @param ctx the parse tree

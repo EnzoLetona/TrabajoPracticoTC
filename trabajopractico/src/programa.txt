@@ -4,20 +4,29 @@ double y;
 int z = 0;
 double w, Q, t, a;
 int a = 5, b, c = 10;
-char tata[15] = " jejeje", tete[], lala[2]="tutu";
+char tata[tam] = " jejeje", tete[], lala[2]="tutu";
 
 lalalla = 1;
-z = y;
+z = y + 5 - 3 + S * d + dada;
 
-while (x < y) { 
+
+while (x < y && y != 5) { 
     double y;
+    char tata[15] = " jejeje", tete[], lala[2]="tutu";
+    int a = 5, b, c = 10;
+    lalalla = 1 + 3 - 2;
 }
 
-if ( x > 2) {
+int main (){
+
+
+}
+
+if ( x == 2 && y < 5) {
     x = 2;
 }
 
-for(int i = 2, j = 4; i < 4 ; i++){
+for( i = 2; i < 4 ; s++){
     x = 3;
     int x;
     int x ;
@@ -32,5 +41,15 @@ int precioZZZZ(float base, int impuesto){
     int x ;
     int x ;
     int a = 5, b, c = 10;
+    for(int i = 2, j = 4; i < 4 ; s++){
+        x = 3;
+        int x;
+        int x ;
+        int a = 5, b, c = 10;
+        if ( x > 2) {
+            x = 2;
+        }
+    }
 }
+
 precioZZZZ( base , impuesto);

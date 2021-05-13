@@ -25,10 +25,14 @@ PARENTESISC : ')';
 LLAVEA: '{';
 LLAVEC: '}';
 PUNTOCOMA: ';';
+MAS : '+';
+MENOS: '-';
+PRODUCTO:'*';
+DIVISION:'/';
 COMA: ',';
 PALABRA : LETRA2+;
 ENTERO : DIGITO+ ;
-COMP : ('<'|'<=' |'==' |'>'|'>=' |'!=');
+COMP : ('<'|'<='|'=='|'>'|'>=' |'!=');
 WS : [ \t\r\n]+ -> skip;
 OTRO : . ->skip;
 
@@ -36,7 +40,9 @@ OTRO : . ->skip;
 programa : 
     instrucciones 
     ;
-instrucciones: instruccion instrucciones |;
+instrucciones: instruccion instrucciones 
+             |
+             ;
 
 instruccion : declaracion  
             | asignacion 
@@ -45,16 +51,41 @@ instruccion : declaracion
             | ifor
             | declaracionfuncion
             | definicionFunciones 
+            | operacionesaritlogicas 
             ;
 
 // IF FOR Y WHILE
 
-iwhile : WHILEF  PARENTESISA variable  COMP  variable  PARENTESISC  LLAVEA  instrucciones  LLAVEC;
-iif : IFF PARENTESISA variable COMP variable PARENTESISC LLAVEA instrucciones LLAVEC ;
-ifor : FORR PARENTESISA declaracion PALABRA COMP variable PUNTOCOMA PALABRA '++' PARENTESISC  LLAVEA  instrucciones  LLAVEC;
+iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instrucciones  LLAVEC;
+iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ;
+ifor : FORR PARENTESISA declaracion PALABRA COMP variable PUNTOCOMA operador PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC;
 
+operador: '++'
+        | '--'
+        |
+        ;
 // ------------------------------------------------------------------------------------------------------------------------------------
-asignacion : PALABRA  EQ  variable  PUNTOCOMA ;
+asignacion : PALABRA  EQ  variable operacion PUNTOCOMA ;
+operacion: operadores variable operacion
+         | operadores variable 
+         |
+         ;
+
+operadores: MAS
+        | MENOS
+        | PRODUCTO
+        | DIVISION
+        ;
+// ------------------------------------------------------------------------------------------------------------------------------------
+operacionesaritlogicas : variable COMP variable '&&' operacionesaritlogicas 
+                       | variable COMP variable 
+                       ;
+
+
+operadorLogico : '&&'
+               | '||'
+               ;
+
 
 //declaracion : type  ( (PALABRA  EQ  ENTERO  (','|';') ) | (PALABRA  (','|';' ) ) )+ ;
 
@@ -72,6 +103,7 @@ declarar : PALABRA EQ ENTERO COMA declarar
          //| PALABRA EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
          //| PALABRA EQ COMILLAS PALABRA COMILLAS declarar
 numerochar : ENTERO
+           | PALABRA
            |
            ;
 
@@ -81,6 +113,7 @@ declaracionfuncion: type PALABRA PARENTESISA parametros PARENTESISC PUNTOCOMA
 
 parametros: type PALABRA COMA parametros
           | type PALABRA
+          |
           ;
 
 llamadoFuncion : PALABRA PARENTESISA concatenacionPalabras PARENTESISC PUNTOCOMA;

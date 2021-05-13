@@ -70,6 +70,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitIfor(programaParser.IforContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#operador}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperador(programaParser.OperadorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#operador}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperador(programaParser.OperadorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#asignacion}.
 	 * @param ctx the parse tree
 	 */
@@ -79,6 +89,46 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAsignacion(programaParser.AsignacionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#operacion}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperacion(programaParser.OperacionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#operacion}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperacion(programaParser.OperacionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#operadores}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperadores(programaParser.OperadoresContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#operadores}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperadores(programaParser.OperadoresContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#operacionesaritlogicas}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperacionesaritlogicas(programaParser.OperacionesaritlogicasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#operacionesaritlogicas}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperacionesaritlogicas(programaParser.OperacionesaritlogicasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#operadorLogico}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperadorLogico(programaParser.OperadorLogicoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#operadorLogico}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperadorLogico(programaParser.OperadorLogicoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#declaracion}.
 	 * @param ctx the parse tree
