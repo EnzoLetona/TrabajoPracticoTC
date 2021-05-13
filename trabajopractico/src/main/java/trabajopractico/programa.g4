@@ -65,7 +65,8 @@ iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instru
 iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ; //check
 ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC; 
 
-declaracionIndice: typeFor declarar;
+declaracionIndice: type declarar
+                 | declarar;
 
 indice : PALABRA EQ variable PUNTOCOMA
        | PALABRA EQ variable COMA indice
