@@ -180,6 +180,26 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitDeclarar(programaParser.DeclararContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#declaracionChar}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracionChar(programaParser.DeclaracionCharContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declaracionChar}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracionChar(programaParser.DeclaracionCharContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#declararChar}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclararChar(programaParser.DeclararCharContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declararChar}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclararChar(programaParser.DeclararCharContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#numerochar}.
 	 * @param ctx the parse tree
 	 */

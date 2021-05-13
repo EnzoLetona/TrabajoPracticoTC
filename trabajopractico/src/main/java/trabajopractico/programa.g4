@@ -55,7 +55,8 @@ instruccion : declaracion
             | definicionFunciones 
             | operacionesaritlogicas
             | llamadoFuncion
-            | returnss 
+            | returnss
+            | declaracionChar 
             ;
 
 // IF FOR Y WHILE
@@ -64,14 +65,12 @@ iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instru
 iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ; //check
 ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC; 
 
-declaracionIndice: typeFor indice;
+declaracionIndice: typeFor declarar;
 
 indice : PALABRA EQ variable PUNTOCOMA
        | PALABRA EQ variable COMA indice
        ;
-typeFor: INT
-       | DOUBLE
-       | FLOAT
+typeFor: type
        |
        ;
 operador: '++'
@@ -107,14 +106,18 @@ declaracion: type declarar //check
 declarar : PALABRA EQ variable COMA declarar
          | PALABRA COMA declarar
          | PALABRA EQ variable PUNTOCOMA
-         | PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS COMA declarar
-         | PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
-         | PALABRA '['numerochar']' COMA declarar
-         | PALABRA '['numerochar']' PUNTOCOMA
          | PALABRA PUNTOCOMA
          ;
          //| PALABRA EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
          //| PALABRA EQ COMILLAS PALABRA COMILLAS declarar
+declaracionChar: CHAR declararChar
+                ;
+declararChar: PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS COMA declararChar
+            | PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
+            | PALABRA '['numerochar']' COMA declararChar
+            | PALABRA '['numerochar']' PUNTOCOMA
+            ;
+
 numerochar : ENTERO
            | PALABRA
            |
@@ -142,7 +145,6 @@ typeFunctions : type
 //----------------------------------------------------------------------------
 type: DOUBLE
     | INT  
-    | CHAR
     | FLOAT
     ;
 //| STRING

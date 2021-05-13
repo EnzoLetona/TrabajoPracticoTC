@@ -115,6 +115,18 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclarar(programaParser.DeclararContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#declaracionChar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracionChar(programaParser.DeclaracionCharContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declararChar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclararChar(programaParser.DeclararCharContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#numerochar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
