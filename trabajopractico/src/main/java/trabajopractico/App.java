@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        System.out.println("Inicio del programa");
         // create a CharStream that reads from file
         CharStream input = CharStreams.fromFileName("trabajopractico/src/programa.txt");
         
@@ -31,5 +31,6 @@ public class App {
         // parser.s();
         ParseTree tree =  parser.programa();
         System.out.println(tree);
+        System.out.println("fin del programa");
     }
 }

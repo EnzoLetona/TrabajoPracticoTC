@@ -26,7 +26,7 @@ if ( x == 2 && y < 5) {
     x = 2;
 }
 
-for( i = 2, s,hghg = sadas; i < 4 ; s++){
+for( int i= 2, s=6, t; i < 4 ; s++){
     x = 3;
     int x;
     int x ;

@@ -4,10 +4,6 @@ grammar programa;
     package trabajopractico;
 }
 
-
-
-//fragment LETRA : [A-Za-z] ;
-
 fragment DIGITO: [0-9];
 fragment LETRA2: [A-Za-z];
 EQ : '=';
@@ -65,17 +61,13 @@ iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instru
 iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ; //check
 ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC; 
 
-declaracionIndice: type declarar
+declaracionIndice: declaracion
                  | declarar;
-
-indice : PALABRA EQ variable PUNTOCOMA
-       | PALABRA EQ variable COMA indice
-       ;
 
 operador: '++'
         | '--'
         ;
-// ------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------ASIGNACION-------------------------------------------------------------------------------------------------------
 asignacion : PALABRA  EQ  variable operacion PUNTOCOMA ; // check
 operacion: operadores variable operacion
          | operadores variable 
@@ -87,7 +79,7 @@ operadores: MAS
         | PRODUCTO
         | DIVISION
         ;
-// ------------------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------OPERACIONARITMETICALOGICA------------------------------------------------------------------------------------------------
 operacionesaritlogicas : variable COMP variable operadorLogico operacionesaritlogicas //check
                        | variable COMP variable 
                        ;
@@ -97,18 +89,16 @@ operadorLogico : '&&'
                | '||'
                ;
 
-
-//declaracion : type  ( (PALABRA  EQ  ENTERO  (','|';') ) | (PALABRA  (','|';' ) ) )+ ;
-
+// ------------------------------------DECLARACION------------------------------------------------------------------------------------------------
 declaracion: type declarar //check
            ;
+
 declarar : PALABRA EQ variable COMA declarar
          | PALABRA COMA declarar
          | PALABRA EQ variable PUNTOCOMA
          | PALABRA PUNTOCOMA
          ;
-         //| PALABRA EQ COMILLAS PALABRA COMILLAS PUNTOCOMA
-         //| PALABRA EQ COMILLAS PALABRA COMILLAS declarar
+
 declaracionChar: CHAR declararChar
                 ;
 declararChar: PALABRA '['numerochar']' EQ COMILLAS PALABRA COMILLAS COMA declararChar
@@ -141,12 +131,12 @@ definicionFunciones: typeFunctions PALABRA PARENTESISA parametros PARENTESISC LL
 typeFunctions : type
               | VOID
               ;
-//----------------------------------------------------------------------------
+//--------------------------------AUXILIARES--------------------------------------------
 type: DOUBLE
     | INT  
     | FLOAT
     ;
-//| STRING
+
 returnss: RETURN variable PUNTOCOMA
         | RETURN llamadoFuncion 
         ;
@@ -157,4 +147,3 @@ variable: PALABRA
 
 
 
-//iwhile -> while (x comp y) { instrucciones }

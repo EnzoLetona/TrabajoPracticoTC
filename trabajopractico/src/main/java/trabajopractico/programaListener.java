@@ -80,16 +80,6 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link programaParser#indice}.
-	 * @param ctx the parse tree
-	 */
-	void enterIndice(programaParser.IndiceContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link programaParser#indice}.
-	 * @param ctx the parse tree
-	 */
-	void exitIndice(programaParser.IndiceContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 */
