@@ -21,10 +21,10 @@ public class App {
         programaParser parser = new programaParser(tokens);
                 
         // create Listener
-        // ExpRegBaseListener escucha = new Escucha();
+        programaBaseListener escucha = new MiListener();
 
         // Conecto el objeto con Listeners al parser
-        // parser.addParseListener(escucha);
+         parser.addParseListener(escucha);
 
         // Solicito al parser que comience indicando una regla gramatical
         // En este caso la regla es el simbolo inicial
@@ -32,5 +32,6 @@ public class App {
         ParseTree tree =  parser.programa();
         System.out.println(tree);
         System.out.println("fin del programa");
+       
     }
 }
