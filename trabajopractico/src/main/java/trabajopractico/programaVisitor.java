@@ -31,6 +31,12 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInstruccion(programaParser.InstruccionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#bloque}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBloque(programaParser.BloqueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#iwhile}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -102,6 +108,18 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclarar(programaParser.DeclararContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declararConDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclararConDef(programaParser.DeclararConDefContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#declararSinDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclararSinDef(programaParser.DeclararSinDefContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#declaracionChar}.
 	 * @param ctx the parse tree

@@ -54,6 +54,18 @@ public class programaBaseListener implements programaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBloque(programaParser.BloqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBloque(programaParser.BloqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIwhile(programaParser.IwhileContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -193,6 +205,30 @@ public class programaBaseListener implements programaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclarar(programaParser.DeclararContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclararConDef(programaParser.DeclararConDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclararConDef(programaParser.DeclararConDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclararSinDef(programaParser.DeclararSinDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclararSinDef(programaParser.DeclararSinDefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

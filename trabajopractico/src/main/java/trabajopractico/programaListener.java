@@ -40,6 +40,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitInstruccion(programaParser.InstruccionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#bloque}.
+	 * @param ctx the parse tree
+	 */
+	void enterBloque(programaParser.BloqueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#bloque}.
+	 * @param ctx the parse tree
+	 */
+	void exitBloque(programaParser.BloqueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#iwhile}.
 	 * @param ctx the parse tree
 	 */
@@ -159,6 +169,26 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclarar(programaParser.DeclararContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#declararConDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclararConDef(programaParser.DeclararConDefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declararConDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclararConDef(programaParser.DeclararConDefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#declararSinDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclararSinDef(programaParser.DeclararSinDefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declararSinDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclararSinDef(programaParser.DeclararSinDefContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#declaracionChar}.
 	 * @param ctx the parse tree

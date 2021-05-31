@@ -52,14 +52,16 @@ instruccion : declaracion
             | operacionesaritlogicas
             | llamadoFuncion
             | returnss
-            | declaracionChar 
+            | declaracionChar
+            | bloque  
             ;
 
 // IF FOR Y WHILE
+bloque : LLAVEA  instrucciones  LLAVEC;
 
-iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  LLAVEA  instrucciones  LLAVEC; //check
-iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC LLAVEA instrucciones LLAVEC ; //check
-ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  LLAVEA  instrucciones  LLAVEC; 
+iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  bloque; //check
+iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC bloque ; //check
+ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  bloque; 
 
 declaracionIndice: declaracion
                  | declarar;
@@ -93,11 +95,16 @@ operadorLogico : '&&'
 declaracion: type declarar //check
            ;
 
-declarar : PALABRA EQ variable COMA declarar
-         | PALABRA COMA declarar
-         | PALABRA EQ variable PUNTOCOMA
-         | PALABRA PUNTOCOMA
+declarar : declararConDef
+         | declararSinDef
          ;
+
+declararConDef : PALABRA EQ variable COMA declarar
+               | PALABRA EQ variable PUNTOCOMA
+               ;
+declararSinDef : PALABRA COMA declarar
+               | PALABRA PUNTOCOMA
+               ;
 
 declaracionChar: CHAR declararChar
                 ;
