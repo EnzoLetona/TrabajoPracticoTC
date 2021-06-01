@@ -1,6 +1,23 @@
-double w=4, Q=6, t=4, a=8;
-
+double w=4, Q=6, t=4;
+int a = 8;
 {
     int p= 5;
-
+    {
+        int tete = 1;
+        {
+             double alo;
+           
+        }
+           int x = 5;
+        {
+            float x = 5;
+            {
+                while (w == 5){
+                    x=3;
+                }
+            }
+        }
+    }
+   
 }
+
