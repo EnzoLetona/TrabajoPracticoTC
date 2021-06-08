@@ -1,23 +1,24 @@
-double w=4, Q=6, t=4;
-int a = 8;
-{
-    int p= 5;
-    {
-        int tete = 1;
-        {
-             double alo;
-           
-        }
-           int x = 5;
-        {
-            float x = 5;
-            {
-                while (w == 5){
-                    x=3;
-                }
-            }
-        }
-    }
-   
+int x = 4;
+int pepe;
+int y;
+
+int sumaB (int x){
+    int total;
+    total = x + y ;
 }
+
+int main(int parametro, int pama, int pamb){
+    int t = 6;
+    {
+        sumaB();
+        pepe = 3;
+        int tarot;
+    }
+    int tarot;
+    if(tarot == 2){
+         parametro = 5;
+    }
+}
+
+
 

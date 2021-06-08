@@ -120,13 +120,16 @@ numerochar : ENTERO
            ;
 
 /* DECLARACION DE FUNCIONES Y LLAMADOS */
-declaracionfuncion: typeFunctions PALABRA PARENTESISA parametros PARENTESISC PUNTOCOMA
+declaracionfuncion: typeFunctions nombreFuncion PARENTESISA parametros PARENTESISC PUNTOCOMA
                   ;
 
-parametros: type PALABRA COMA parametros
-          | type PALABRA
+nombreFuncion : PALABRA;
+
+parametros: type nombreParametro COMA parametros
+          | type nombreParametro
           |
           ;
+nombreParametro : PALABRA;
 
 llamadoFuncion : PALABRA PARENTESISA concatenacionPalabras PARENTESISC PUNTOCOMA;
 concatenacionPalabras: PALABRA COMA concatenacionPalabras
@@ -134,7 +137,7 @@ concatenacionPalabras: PALABRA COMA concatenacionPalabras
                      |
                      ;
 
-definicionFunciones: typeFunctions PALABRA PARENTESISA parametros PARENTESISC LLAVEA instrucciones LLAVEC ;
+definicionFunciones: typeFunctions nombreFuncion PARENTESISA parametros PARENTESISC bloque ;
 typeFunctions : type
               | VOID
               ;

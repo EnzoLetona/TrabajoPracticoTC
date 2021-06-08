@@ -145,11 +145,23 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#nombreFuncion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNombreFuncion(programaParser.NombreFuncionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#parametros}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParametros(programaParser.ParametrosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#nombreParametro}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNombreParametro(programaParser.NombreParametroContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#llamadoFuncion}.
 	 * @param ctx the parse tree

@@ -17,7 +17,15 @@ public class MiId {
   private Boolean Inicializada;
   private TipoDato tipoDato;
   private Boolean Usada;
+  private Boolean funcion;
 
+  public Boolean getFuncion() {
+    return this.funcion;
+  }
+
+  public void setFuncion(Boolean funcion) {
+    this.funcion = funcion;
+  };
   
 
 
@@ -27,6 +35,7 @@ public class MiId {
      this.tipoDato= TipoDato.UNDEFINED ;
      this.Usada= false;
      this.Inicializada=false;
+     this.funcion = false;
   }
   
   public String getToken() {

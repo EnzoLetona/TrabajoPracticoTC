@@ -230,6 +230,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#nombreFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void enterNombreFuncion(programaParser.NombreFuncionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#nombreFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void exitNombreFuncion(programaParser.NombreFuncionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#parametros}.
 	 * @param ctx the parse tree
 	 */
@@ -239,6 +249,16 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParametros(programaParser.ParametrosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#nombreParametro}.
+	 * @param ctx the parse tree
+	 */
+	void enterNombreParametro(programaParser.NombreParametroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#nombreParametro}.
+	 * @param ctx the parse tree
+	 */
+	void exitNombreParametro(programaParser.NombreParametroContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#llamadoFuncion}.
 	 * @param ctx the parse tree

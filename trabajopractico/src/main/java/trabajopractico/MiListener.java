@@ -6,12 +6,23 @@ import java.util.*;
 
 public class MiListener extends programaBaseListener{
   public String tipoVariable;
+  public Boolean comeParameters = false;
   public boolean isDeclaration = false;
+  public boolean isDeclarationFunction = false;
+  public String tipoVariableParametros;
   public MiId miid = new MiId(); 
   public List<String> lista = new ArrayList<String>();
+  public List<String> funcionesDeclaradas = new ArrayList<String>();
   public int indexContextoActual = 1;
+  public boolean isAsignation = false;
   public boolean error = false;
   public boolean isOperacionAritmeticaLogica = false;
+  public String nombreFuncion;
+  public boolean inFunction = false;
+  public List<Integer> indecesFunciones =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
+  public List<Integer> limiteInferior =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
+  public List<Integer> limiteSuperior =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
+  public int bandera = 1;
   public boolean isInt(String s){
     try{ 
       int i = Integer.parseInt(s); 
@@ -22,12 +33,12 @@ public class MiListener extends programaBaseListener{
     }
   }
 
-  @Override public void enterAsignacion(programaParser.AsignacionContext ctx) { 
+  @Override public void enterAsignacion(programaParser.AsignacionContext ctx) {
+    isAsignation = true; 
    MiId idLocal = new MiId();
    MiId idLocalAux = new MiId();
    Boolean encontrado=false;
    idLocal.setToken(ctx.getStart().getText());
-   //System.out.println("token encontrado " + TablaSimbolos.getInstance().buscarIdLocal(idLocal,indexContextoActual));
    for(int i =indexContextoActual ; i >= 1 ; i-- ){
      if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
       idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
@@ -44,12 +55,13 @@ public class MiListener extends programaBaseListener{
   
   }
 
+  @Override public void exitAsignacion(programaParser.AsignacionContext ctx) { 
+    isAsignation = false;
+  }
 
   @Override public void enterDeclaracion(programaParser.DeclaracionContext ctx) { 
-  
     isDeclaration = true;
     tipoVariable = ctx.getStart().getText();
-   
   }
 
   @Override public void exitDeclaracion(programaParser.DeclaracionContext ctx) { 
@@ -77,11 +89,8 @@ public class MiListener extends programaBaseListener{
     boolean addIDStatus;
     if(tipoVariable.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
     if(tipoVariable.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
-
-    //idLocal.Token = ctx.getStart().getText();
     idLocal.setToken( ctx.getStart().getText());
     idLocal.setInicializada(false);
-  
     addIDStatus = TablaSimbolos.getInstance().addId(idLocal,indexContextoActual); 
     if(!addIDStatus) error = true; 
   }
@@ -90,7 +99,10 @@ public class MiListener extends programaBaseListener{
 
   @Override public void exitPrograma(programaParser.ProgramaContext ctx) {
     if (!error) TablaSimbolos.getInstance().getTabla();
-    
+    for(int i=0; i < limiteInferior.size(); i++){
+      System.out.println(limiteInferior.get(i));
+      System.out.println(limiteSuperior.get(i));
+    }
     //System.out.println(indexContextoActual);
   }
 
@@ -127,14 +139,43 @@ public class MiListener extends programaBaseListener{
         }
       }
     }
+    if(isAsignation){
+      if(!isInt(ctx.getStart().getText())){
+        MiId idLocal = new MiId();
+        MiId idLocalAux = new MiId();
+        Boolean encontrado=false;
+        idLocal.setToken(ctx.getStart().getText());
+        for(int i =indexContextoActual ; i >= 1 ; i-- ){
+          if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
+           idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
+           i = 0;
+           encontrado = true;
+          }
+        }
+        if(encontrado) {
+         idLocalAux.setUsada(true);
+        }else{
+         error = true;
+         System.out.println("La variable |"+ctx.getStart().getText()+"| no esta declarada");
+        }
+      }
+    }
   }
 
-  @Override public void enterBloque(programaParser.BloqueContext ctx) { 
-    TablaSimbolos.getInstance().addContexto();
-    indexContextoActual += 1; 
+  @Override public void enterBloque(programaParser.BloqueContext ctx) {
+    if(comeParameters == false){
+      indexContextoActual += 1; 
+      TablaSimbolos.getInstance().addContexto();
+    }
+    else {
+      comeParameters = false;
+    }
+    
+    
   }
   @Override public void exitBloque(programaParser.BloqueContext ctx) { 
     indexContextoActual -= 1; 
+    TablaSimbolos.getInstance().removeLastContexto(); 
   }
  
   @Override public void enterOperacionesaritlogicas(programaParser.OperacionesaritlogicasContext ctx) { 
@@ -143,6 +184,77 @@ public class MiListener extends programaBaseListener{
 
   @Override public void exitOperacionesaritlogicas(programaParser.OperacionesaritlogicasContext ctx) { 
     isOperacionAritmeticaLogica = false;
+  }
+
+  @Override public void enterNombreFuncion(programaParser.NombreFuncionContext ctx) { 
+    if(isDeclarationFunction==false){
+      this.nombreFuncion = ctx.getStart().getText();
+      MiId idLocal = new MiId();
+      idLocal.setToken(this.nombreFuncion);
+      idLocal.setFuncion(true);
+      idLocal.setInicializada(true);
+      TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
+    }
+    else{
+      funcionesDeclaradas.add(ctx.getStart().getText());
+    }
+    
+  }
+
+  @Override public void enterDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx) { 
+    this.inFunction = true;
+    limiteInferior.add(bandera+1);
+    //System.out.println(" rarara "+ctx.getStart().getText());
+    //isOperacionAritmeticaLogica = true;
+  }
+  @Override public void exitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx) { 
+    this.indexContextoActual = 1;
+    limiteSuperior.add(bandera);
+    //System.out.println(" rarara "+ctx.getStart().getText());
+    //isOperacionAritmeticaLogica = true;
+  }
+
+  @Override public void enterParametros(programaParser.ParametrosContext ctx) { 
+    if(!ctx.getStart().getText().equals(")") && comeParameters != true){
+      comeParameters = true;
+      indexContextoActual += 1; 
+      TablaSimbolos.getInstance().addContexto();
+    }
+  }
+
+  @Override public void enterNombreParametro(programaParser.NombreParametroContext ctx) { 
+    MiId idLocal = new MiId();
+    idLocal.setToken(ctx.getStart().getText());
+    if(tipoVariableParametros.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
+    if(tipoVariableParametros.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
+    TablaSimbolos.getInstance().addId(idLocal, indexContextoActual);
+  }
+  
+  @Override public void enterType(programaParser.TypeContext ctx) { 
+    tipoVariableParametros = ctx.getStart().getText();
+  }
+
+  @Override public void enterLlamadoFuncion(programaParser.LlamadoFuncionContext ctx) { 
+    
+    MiId idLocal = new MiId();
+    MiId idLocalAux = new MiId();
+    idLocal.setToken(ctx.getStart().getText());
+    if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,1)){
+      idLocalAux = TablaSimbolos.getInstance().obtenerId(1,ctx.getStart().getText());
+      idLocalAux.setUsada(true);
+    }
+    else{
+      System.out.println("La funcion |" + ctx.getStart().getText() + "| no se encuentra definida ni declarada");
+      error = true;
+    }
+  }
+  
+  @Override public void enterDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { 
+    isDeclarationFunction= true;
+  }
+
+  @Override public void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { 
+    isDeclarationFunction= false;
   }
 
 

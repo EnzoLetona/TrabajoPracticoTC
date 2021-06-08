@@ -282,6 +282,18 @@ public class programaBaseListener implements programaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNombreFuncion(programaParser.NombreFuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNombreFuncion(programaParser.NombreFuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParametros(programaParser.ParametrosContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -289,6 +301,18 @@ public class programaBaseListener implements programaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParametros(programaParser.ParametrosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNombreParametro(programaParser.NombreParametroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNombreParametro(programaParser.NombreParametroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
