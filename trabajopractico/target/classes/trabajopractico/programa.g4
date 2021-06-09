@@ -120,11 +120,14 @@ numerochar : ENTERO
            ;
 
 /* DECLARACION DE FUNCIONES Y LLAMADOS */
-declaracionfuncion: typeFunctions nombreFuncion PARENTESISA parametros PARENTESISC PUNTOCOMA
+declaracionfuncion: typeFunctions nombreFuncion PARENTESISA parametrosSinDef PARENTESISC PUNTOCOMA
                   ;
 
 nombreFuncion : PALABRA;
-
+parametrosSinDef: type COMA parametrosSinDef
+                | type
+                |
+                ;
 parametros: type nombreParametro COMA parametros
           | type nombreParametro
           |

@@ -13,6 +13,10 @@ public class MiListener extends programaBaseListener{
   public MiId miid = new MiId(); 
   public List<String> lista = new ArrayList<String>();
   public List<String> funcionesDeclaradas = new ArrayList<String>();
+  public List<String> parametros = new ArrayList<String>();
+  public ArrayList<Integer> cantParametros = new ArrayList<Integer>();
+  public String tipoFuncion;
+  public Integer cantidad = 0;
   public int indexContextoActual = 1;
   public boolean isAsignation = false;
   public boolean error = false;
@@ -99,10 +103,6 @@ public class MiListener extends programaBaseListener{
 
   @Override public void exitPrograma(programaParser.ProgramaContext ctx) {
     if (!error) TablaSimbolos.getInstance().getTabla();
-    for(int i=0; i < limiteInferior.size(); i++){
-      System.out.println(limiteInferior.get(i));
-      System.out.println(limiteSuperior.get(i));
-    }
     //System.out.println(indexContextoActual);
   }
 
@@ -173,7 +173,21 @@ public class MiListener extends programaBaseListener{
     
     
   }
-  @Override public void exitBloque(programaParser.BloqueContext ctx) { 
+  @Override public void exitBloque(programaParser.BloqueContext ctx) {
+   Set<String> oneContext =  TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet();
+   if(oneContext.size() != 0){
+     MiId idAuxiliar = new MiId();
+     String searchingToken;
+     for(int i = 0 ; i < oneContext.size() ; i++){
+      searchingToken = oneContext.toArray(new String[0])[i];
+      idAuxiliar=TablaSimbolos.getInstance().obtenerId(indexContextoActual,searchingToken);
+      if(idAuxiliar.getUsada()==false){
+        System.out.println("La variable |"+idAuxiliar.getToken()+"| esta declarada pero no usada");
+        error=true;
+      }
+     }
+   }
+    //System.out.println (" |||"+ TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet().size());
     indexContextoActual -= 1; 
     TablaSimbolos.getInstance().removeLastContexto(); 
   }
@@ -186,17 +200,35 @@ public class MiListener extends programaBaseListener{
     isOperacionAritmeticaLogica = false;
   }
 
-  @Override public void enterNombreFuncion(programaParser.NombreFuncionContext ctx) { 
+  @Override public void enterNombreFuncion(programaParser.NombreFuncionContext ctx) {
+    this.nombreFuncion = ctx.getStart().getText(); 
+    MiId idLocal = new MiId();
+    idLocal.setToken(this.nombreFuncion);
+    idLocal.setFuncion(true);
+    if(tipoFuncion.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
+    if(tipoFuncion.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
+    if(tipoFuncion.equals("float")) idLocal.setTipoDato(TipoDato.FLOAT);
+    if(tipoFuncion.equals("void")) idLocal.setTipoDato(TipoDato.VOID);
     if(isDeclarationFunction==false){
-      this.nombreFuncion = ctx.getStart().getText();
-      MiId idLocal = new MiId();
-      idLocal.setToken(this.nombreFuncion);
-      idLocal.setFuncion(true);
-      idLocal.setInicializada(true);
-      TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
+      if(!nombreFuncion.equals("main")){
+        MiId idAuxiliar = new MiId();
+        if(TablaSimbolos.getInstance().buscarIdLocal(idLocal,1)){
+          idAuxiliar=TablaSimbolos.getInstance().obtenerId(1,nombreFuncion);
+          idAuxiliar.setInicializada(true);
+        }
+        else{
+          System.out.println("Defina el prototipado de la funcion |" + nombreFuncion  + "|");
+          error = true;
+        }
+      }
+      else{
+        idLocal.setInicializada(true);
+        TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
+      }
     }
     else{
       funcionesDeclaradas.add(ctx.getStart().getText());
+      TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
     }
     
   }
@@ -230,7 +262,7 @@ public class MiListener extends programaBaseListener{
     TablaSimbolos.getInstance().addId(idLocal, indexContextoActual);
   }
   
-  @Override public void enterType(programaParser.TypeContext ctx) { 
+  @Override public void enterType(programaParser.TypeContext ctx) {
     tipoVariableParametros = ctx.getStart().getText();
   }
 
@@ -253,12 +285,15 @@ public class MiListener extends programaBaseListener{
     isDeclarationFunction= true;
   }
 
-  @Override public void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { 
+  @Override public void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) {
     isDeclarationFunction= false;
+    
+    System.out.println(funcionesDeclaradas);
   }
 
-
+  @Override public void enterTypeFunctions(programaParser.TypeFunctionsContext ctx) { 
+    tipoFuncion = ctx.getStart().getText();
+  }
   
-
-
+ 
 }

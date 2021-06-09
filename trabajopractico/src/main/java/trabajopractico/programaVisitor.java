@@ -151,6 +151,12 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNombreFuncion(programaParser.NombreFuncionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#parametrosSinDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParametrosSinDef(programaParser.ParametrosSinDefContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#parametros}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

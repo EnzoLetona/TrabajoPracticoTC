@@ -1,24 +1,26 @@
 int x = 4;
 int pepe;
 int y;
+void prueba(int,int);
+void sumaB(int,double,double,int,int);
 
-int sumaB (int x){
-    int total;
-    total = x + y ;
-}
 
-int main(int parametro, int pama, int pamb){
+
+int main(int parametro){
     int t = 6;
     {
         sumaB();
         pepe = 3;
-        int tarot;
     }
     int tarot;
-    if(tarot == 2){
-         parametro = 5;
+    if(tarot == 2 && t ==3){
+        parametro = 5;
     }
 }
 
 
-
+int sumaB (int x, int porfavor){
+    porfavor=10;
+    int total;
+    total = x + y ;
+}

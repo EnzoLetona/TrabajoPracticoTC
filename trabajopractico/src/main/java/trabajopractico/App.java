@@ -50,14 +50,6 @@ public class App {
        // tabla.addId(midi3);
 //
        // tabla.getTabla();
-       String texto = "func_getNumber";
-       String aux = texto.replace("func_", "");
-       if(aux.equals("getNumber")){
-              System.out.println("es igualk "+aux);
-       }
-       TablaSimbolos.getInstance().addContextoFisico();
-       TablaSimbolos.getInstance().addContextoFisico();
-       TablaSimbolos.getInstance().showContextoFisico();
 
        
     }

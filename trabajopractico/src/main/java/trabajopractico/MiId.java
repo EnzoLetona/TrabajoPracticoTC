@@ -5,6 +5,7 @@ enum TipoDato {
   VOID, 
   INT,
   DOUBLE,
+  FLOAT,
   UNDEFINED
 }
 

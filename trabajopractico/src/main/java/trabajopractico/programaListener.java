@@ -240,6 +240,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitNombreFuncion(programaParser.NombreFuncionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#parametrosSinDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterParametrosSinDef(programaParser.ParametrosSinDefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#parametrosSinDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitParametrosSinDef(programaParser.ParametrosSinDefContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#parametros}.
 	 * @param ctx the parse tree
 	 */

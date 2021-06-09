@@ -20,6 +20,10 @@ public class TablaSimbolos {
     contextosLogicos.get(indexContexto-1).put(id.getToken(), id);
   }
 
+  public HashMap<String,MiId> obtenerContexto(int index){ 
+    return contextosLogicos.get(index-1); 
+  }
+
   public boolean buscarId ( MiId id ){
     for(int i = 0; i < contextosLogicos.size() ; i++ ){
        if (contextosLogicos.get(i).containsKey(id.getToken())) return true; 
