@@ -90,6 +90,16 @@ public interface programaListener extends ParseTreeListener {
 	 */
 	void exitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link programaParser#declararIndice}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclararIndice(programaParser.DeclararIndiceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#declararIndice}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclararIndice(programaParser.DeclararIndiceContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 */
@@ -229,6 +239,26 @@ public interface programaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#reglaParentesisA}.
+	 * @param ctx the parse tree
+	 */
+	void enterReglaParentesisA(programaParser.ReglaParentesisAContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#reglaParentesisA}.
+	 * @param ctx the parse tree
+	 */
+	void exitReglaParentesisA(programaParser.ReglaParentesisAContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link programaParser#reglaParentesisC}.
+	 * @param ctx the parse tree
+	 */
+	void enterReglaParentesisC(programaParser.ReglaParentesisCContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link programaParser#reglaParentesisC}.
+	 * @param ctx the parse tree
+	 */
+	void exitReglaParentesisC(programaParser.ReglaParentesisCContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link programaParser#nombreFuncion}.
 	 * @param ctx the parse tree

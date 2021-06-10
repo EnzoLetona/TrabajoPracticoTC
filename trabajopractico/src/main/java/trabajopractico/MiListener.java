@@ -3,12 +3,13 @@ package trabajopractico;
 
 //import org.antlr.v4.runtime.ParserRuleContext;
 import java.util.*;
-
+import org.antlr.v4.runtime.tree.ErrorNode;
 public class MiListener extends programaBaseListener{
   public String tipoVariable;
   public Boolean comeParameters = false;
   public boolean isDeclaration = false;
   public boolean isDeclarationFunction = false;
+  public boolean isAFor = false;
   public String tipoVariableParametros;
   public MiId miid = new MiId(); 
   public List<String> lista = new ArrayList<String>();
@@ -37,6 +38,12 @@ public class MiListener extends programaBaseListener{
     }
   }
 
+  public void sintacticControlPyC(String PyC, int line){
+    if(!PyC.equals(";")){
+      System.out.println("Sintactic error - missing ';' in the line "+line);
+      error = true;
+    }
+  }
   @Override public void enterAsignacion(programaParser.AsignacionContext ctx) {
     isAsignation = true; 
    MiId idLocal = new MiId();
@@ -52,15 +59,18 @@ public class MiListener extends programaBaseListener{
    }
    if(encontrado) {
     idLocalAux.setUsada(true);
+    idLocalAux.setInicializada(true);
    }else{
     error = true;
-    System.out.println("La variable |"+ctx.getStart().getText()+"| no esta declarada");
+    System.out.println("Semantic error (asignation) - variable '"+ctx.getStart().getText()+"' is not declared - in the line " + ctx.getStart().getLine());
    }
   
   }
 
   @Override public void exitAsignacion(programaParser.AsignacionContext ctx) { 
     isAsignation = false;
+    
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
 
   @Override public void enterDeclaracion(programaParser.DeclaracionContext ctx) { 
@@ -86,9 +96,13 @@ public class MiListener extends programaBaseListener{
     addIDStatus = TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
     if(!addIDStatus) error = true; 
   }
+  
+  @Override public void exitDeclararConDef(programaParser.DeclararConDefContext ctx) { 
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
+  }
 
   @Override public void enterDeclararSinDef(programaParser.DeclararSinDefContext ctx) { 
-
+    System.out.println("entreeeeee");
     MiId idLocal = new MiId();
     boolean addIDStatus;
     if(tipoVariable.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
@@ -99,9 +113,31 @@ public class MiListener extends programaBaseListener{
     if(!addIDStatus) error = true; 
   }
   
+  @Override public void exitDeclararSinDef(programaParser.DeclararSinDefContext ctx) { 
+    System.out.println("saliiiiii");
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
+  }
 
 
   @Override public void exitPrograma(programaParser.ProgramaContext ctx) {
+   Set<String> oneContext =  TablaSimbolos.getInstance().obtenerContexto(1).keySet();
+   if(oneContext.size() != 0){
+     MiId idAuxiliar = new MiId();
+     String searchingToken;
+     for(int i = 0 ; i < oneContext.size() ; i++){
+      searchingToken = oneContext.toArray(new String[0])[i];
+      idAuxiliar=TablaSimbolos.getInstance().obtenerId(1,searchingToken);
+      if(idAuxiliar.getUsada()==false && !idAuxiliar.getToken().equals("main")){
+        System.out.println("Semantic error - declared but not used '"+idAuxiliar.getToken()+"'");
+        error=true;
+      }
+      if(idAuxiliar.getInicializada()==false && !idAuxiliar.getToken().equals("main")){
+        System.out.println("Semantic error - declared but not initialize '"+idAuxiliar.getToken()+"'");
+        error=true;
+      }
+     }
+   }
+    TablaSimbolos.getInstance().addContextoFisico( TablaSimbolos.getInstance().obtenerContexto(1));
     if (!error) TablaSimbolos.getInstance().getTabla();
     //System.out.println(indexContextoActual);
   }
@@ -115,6 +151,33 @@ public class MiListener extends programaBaseListener{
       }
       if(tipoVariable.equals("double")){
         if (!isInt(ctx.getStart().getText())) System.out.println("La variable es de tipo entero y chantaste cualquiera");
+      }
+    }
+
+    if(isAFor){
+      if(!isInt(ctx.getStart().getText())){
+        MiId idLocal = new MiId();
+        MiId idLocalAux = new MiId();
+        Boolean encontrado=false;
+        idLocal.setToken(ctx.getStart().getText());
+        for(int i =indexContextoActual ; i >= 1 ; i-- ){
+          if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
+           idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
+           i = 0;
+           encontrado = true;
+          }
+        }
+        if(encontrado) {
+          idLocalAux.setUsada(true);
+          if(idLocalAux.getInicializada() == false){
+            error = true;
+            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
+          }
+          idLocalAux.setUsada(true);
+        }else{
+         error = true;
+         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line "+ ctx.getStart().getLine());
+        }
       }
     }
 
@@ -132,10 +195,14 @@ public class MiListener extends programaBaseListener{
           }
         }
         if(encontrado) {
-         idLocalAux.setUsada(true);
+          if(idLocalAux.getInicializada() == false){
+            error = true;
+            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
+          }
+          idLocalAux.setUsada(true);
         }else{
          error = true;
-         System.out.println("La variable |"+ctx.getStart().getText()+"| no esta declarada");
+         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line " + ctx.getStart().getLine());
         }
       }
     }
@@ -153,10 +220,14 @@ public class MiListener extends programaBaseListener{
           }
         }
         if(encontrado) {
-         idLocalAux.setUsada(true);
+          idLocalAux.setUsada(true);
+          if(idLocalAux.getInicializada() == false){
+            error = true;
+            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
+          }
         }else{
          error = true;
-         System.out.println("La variable |"+ctx.getStart().getText()+"| no esta declarada");
+         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line " + ctx.getStart().getLine());
         }
       }
     }
@@ -182,12 +253,15 @@ public class MiListener extends programaBaseListener{
       searchingToken = oneContext.toArray(new String[0])[i];
       idAuxiliar=TablaSimbolos.getInstance().obtenerId(indexContextoActual,searchingToken);
       if(idAuxiliar.getUsada()==false){
-        System.out.println("La variable |"+idAuxiliar.getToken()+"| esta declarada pero no usada");
+        System.out.println("Semantic error - declared but not used '"+idAuxiliar.getToken()+"' - in the line "+ctx.getStart().getLine());
         error=true;
       }
      }
    }
+   TablaSimbolos.getInstance().addContextoFisico(TablaSimbolos.getInstance().obtenerContexto(indexContextoActual));
+
     //System.out.println (" |||"+ TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet().size());
+
     indexContextoActual -= 1; 
     TablaSimbolos.getInstance().removeLastContexto(); 
   }
@@ -217,7 +291,7 @@ public class MiListener extends programaBaseListener{
           idAuxiliar.setInicializada(true);
         }
         else{
-          System.out.println("Defina el prototipado de la funcion |" + nombreFuncion  + "|");
+          System.out.println("Semantic error - define prototype of the function '" + nombreFuncion  + "' - in the line " + ctx.getStart().getLine());
           error = true;
         }
       }
@@ -227,8 +301,10 @@ public class MiListener extends programaBaseListener{
       }
     }
     else{
-      funcionesDeclaradas.add(ctx.getStart().getText());
-      TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
+      Boolean repeat;
+      if(!TablaSimbolos.getInstance().addId(idLocal,1)){
+        error = true;
+      }                                             //posible cambio
     }
     
   }
@@ -259,6 +335,7 @@ public class MiListener extends programaBaseListener{
     idLocal.setToken(ctx.getStart().getText());
     if(tipoVariableParametros.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
     if(tipoVariableParametros.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
+    idLocal.setInicializada(true);
     TablaSimbolos.getInstance().addId(idLocal, indexContextoActual);
   }
   
@@ -276,24 +353,58 @@ public class MiListener extends programaBaseListener{
       idLocalAux.setUsada(true);
     }
     else{
-      System.out.println("La funcion |" + ctx.getStart().getText() + "| no se encuentra definida ni declarada");
+      System.out.println("Semantic error - function undeclared '" + ctx.getStart().getText() + "' - in the line "+ ctx.getStart().getLine());
       error = true;
     }
   }
   
+  @Override public void exitLlamadoFuncion(programaParser.LlamadoFuncionContext ctx) {
+    System.out.println("Entro aca"); 
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
+  }
+  
+
   @Override public void enterDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { 
     isDeclarationFunction= true;
   }
 
   @Override public void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) {
     isDeclarationFunction= false;
-    
-    System.out.println(funcionesDeclaradas);
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
 
   @Override public void enterTypeFunctions(programaParser.TypeFunctionsContext ctx) { 
     tipoFuncion = ctx.getStart().getText();
   }
   
- 
+  @Override public void visitErrorNode(ErrorNode node) { 
+    System.out.println("Sintactic error - missing ';'");
+  }
+
+  @Override public void exitReturnss(programaParser.ReturnssContext ctx) { 
+    sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
+  }
+
+  @Override public void exitReglaParentesisA(programaParser.ReglaParentesisAContext ctx) { 
+    if(!ctx.getStart().getText().equals("(")){
+      System.out.println("Sintactic error - missing '(' in the line " + ctx.getStart().getLine());
+    }
+  }
+
+  @Override public void exitReglaParentesisC(programaParser.ReglaParentesisCContext ctx) { 
+    if(!ctx.getStart().getText().equals(")")){
+      System.out.println("Sintactic error - missing ')' in the line " + ctx.getStart().getLine());
+    }
+  }
+
+  @Override public void enterIfor(programaParser.IforContext ctx) { 
+    isAFor = true;
+  }
+  @Override public void exitIfor(programaParser.IforContext ctx) { 
+    isAFor = false;
+  }
+  
+  
+  
+  
 }

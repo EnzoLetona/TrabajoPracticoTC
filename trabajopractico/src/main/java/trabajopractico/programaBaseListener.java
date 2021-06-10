@@ -114,6 +114,18 @@ public class programaBaseListener implements programaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclararIndice(programaParser.DeclararIndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclararIndice(programaParser.DeclararIndiceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOperador(programaParser.OperadorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -277,6 +289,30 @@ public class programaBaseListener implements programaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReglaParentesisA(programaParser.ReglaParentesisAContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReglaParentesisA(programaParser.ReglaParentesisAContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReglaParentesisC(programaParser.ReglaParentesisCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReglaParentesisC(programaParser.ReglaParentesisCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

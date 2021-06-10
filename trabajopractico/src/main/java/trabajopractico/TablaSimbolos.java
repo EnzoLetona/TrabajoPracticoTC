@@ -8,8 +8,8 @@ public class TablaSimbolos {
   private List<HashMap<String,MiId>> contextosLogicos;
   private List<HashMap<String,MiId>> contextosFisicos;
 
-  public void addContextoFisico(){ 
-    contextosFisicos.add(new HashMap<String,MiId>());
+  public void addContextoFisico(HashMap <String,MiId> contexto){ 
+    contextosFisicos.add(contexto);
   }
 
   public void showContextoFisico(){ 
@@ -53,7 +53,7 @@ public class TablaSimbolos {
 
   public boolean addId (MiId id, int indexContexto) {
     if (buscarIdLocal(id,indexContexto)){
-      System.out.println("El token: "+ id.getToken() + " ya se encuentra declarado, (redeclaration error!)" );
+      System.out.println("Semantic error - the token: "+ id.getToken() + " already declared in this context (redeclaration error!)" );
       return false;
     }
     else {
@@ -63,8 +63,8 @@ public class TablaSimbolos {
    
   }
   public void getTabla() {
-    for (int i = 0 ; i <contextosLogicos.size() ; i++){
-      List<MiId> idLista = new ArrayList<MiId>(contextosLogicos.get(i).values());
+    for (int i = 0 ; i <contextosFisicos.size() ; i++){
+      List<MiId> idLista = new ArrayList<MiId>(contextosFisicos.get(i).values());
       System.out.println("CONTEXTO " + i);
       for(int j = 0 ; j < idLista.size(); j++){
         System.out.println(" TOKEN:" + idLista.get(j).getToken() + " Inicializada: " + idLista.get(j).getInicializada() + " Tipo: " + idLista.get(j).getTipoDato() + " Usada: " + idLista.get(j).getUsada()+ " Funcion: " +idLista.get(j).getFuncion());

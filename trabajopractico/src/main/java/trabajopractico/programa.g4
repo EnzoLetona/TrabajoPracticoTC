@@ -59,12 +59,17 @@ instruccion : declaracion
 // IF FOR Y WHILE
 bloque : LLAVEA  instrucciones  LLAVEC;
 
-iwhile : WHILEF  PARENTESISA operacionesaritlogicas  PARENTESISC  bloque; //check
-iif : IFF PARENTESISA operacionesaritlogicas PARENTESISC bloque ; //check
-ifor : FORR PARENTESISA declaracionIndice PALABRA COMP variable PUNTOCOMA  PALABRA operador PARENTESISC  bloque; 
+iwhile : WHILEF  reglaParentesisA operacionesaritlogicas  PARENTESISC  bloque; //check
+iif : IFF reglaParentesisA operacionesaritlogicas PARENTESISC bloque ; //check
+ifor : FORR PARENTESISA declaracionIndice variable COMP variable PUNTOCOMA  variable operador PARENTESISC  bloque; 
 
-declaracionIndice: declaracion
-                 | declarar;
+declaracionIndice: declararIndice;
+
+declararIndice:  variable EQ variable COMA declararIndice
+               | variable EQ variable PUNTOCOMA
+               | variable COMA declararIndice
+               | variable PUNTOCOMA
+               ;
 
 operador: '++'
         | '--'
@@ -120,8 +125,14 @@ numerochar : ENTERO
            ;
 
 /* DECLARACION DE FUNCIONES Y LLAMADOS */
-declaracionfuncion: typeFunctions nombreFuncion PARENTESISA parametrosSinDef PARENTESISC PUNTOCOMA
+declaracionfuncion: typeFunctions nombreFuncion reglaParentesisA parametrosSinDef reglaParentesisC PUNTOCOMA
                   ;
+
+reglaParentesisA: PARENTESISA
+                | ;
+
+reglaParentesisC: PARENTESISC
+                | ;
 
 nombreFuncion : PALABRA;
 parametrosSinDef: type COMA parametrosSinDef
@@ -134,13 +145,13 @@ parametros: type nombreParametro COMA parametros
           ;
 nombreParametro : PALABRA;
 
-llamadoFuncion : PALABRA PARENTESISA concatenacionPalabras PARENTESISC PUNTOCOMA;
+llamadoFuncion : PALABRA reglaParentesisA concatenacionPalabras PARENTESISC PUNTOCOMA;
 concatenacionPalabras: PALABRA COMA concatenacionPalabras
                      | PALABRA
                      |
                      ;
 
-definicionFunciones: typeFunctions nombreFuncion PARENTESISA parametros PARENTESISC bloque ;
+definicionFunciones: typeFunctions nombreFuncion reglaParentesisA parametros PARENTESISC bloque ;
 typeFunctions : type
               | VOID
               ;

@@ -1,26 +1,34 @@
-int x = 4;
-int pepe;
-int y;
-void prueba(int,int);
-void sumaB(int,double,double,int,int);
+int pruebaa(int);
+int otrafuncion(int);
 
-
-
-int main(int parametro){
-    int t = 6;
-    {
-        sumaB();
-        pepe = 3;
+int main(){
+  int num=1;
+  int forrr=4;
+  int resultado;
+  int hola=5;
+  resultado = num + 5;
+  {
+    int contextoo=0;
+    if (contextoo ==4){
+      pruebaa();
+      otrafuncion();
     }
-    int tarot;
-    if(tarot == 2 && t ==3){
-        parametro = 5;
+    while (444 < resultado) {
+      otrafuncion();
     }
+
+    for(forrr = 4 ; hola < 5 ; hola ++){
+      otrafuncion();
+    }
+  }
+}
+
+int pruebaa(int nn, int nnnn, int nnnnn){
+  nnnn = nn + nnnnn;
 }
 
 
-int sumaB (int x, int porfavor){
-    porfavor=10;
-    int total;
-    total = x + y ;
+int otrafuncion(int nn, int nnnn, int nnnnn){
+  nnnn = nn + nnnnn;
 }
+

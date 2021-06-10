@@ -61,6 +61,12 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaracionIndice(programaParser.DeclaracionIndiceContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link programaParser#declararIndice}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclararIndice(programaParser.DeclararIndiceContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link programaParser#operador}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -144,6 +150,18 @@ public interface programaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#reglaParentesisA}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReglaParentesisA(programaParser.ReglaParentesisAContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link programaParser#reglaParentesisC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReglaParentesisC(programaParser.ReglaParentesisCContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link programaParser#nombreFuncion}.
 	 * @param ctx the parse tree
