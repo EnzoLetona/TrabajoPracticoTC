@@ -1,22 +1,17 @@
 int pruebaa(int);
 int otrafuncion(int);
-
+int global=1;
 int main(){
   int num=1;
   int forrr=4;
-  int resultado;
+  float resultado;
   int hola=5;
+  pruebaa();
   resultado = num + 5;
-  {
-    int contextoo=0;
-    if (contextoo ==4){
-      pruebaa();
+  { 
+    if( global< 4){
       otrafuncion();
     }
-    while (444 < resultado) {
-      otrafuncion();
-    }
-
     for(forrr = 4 ; hola < 5 ; hola ++){
       otrafuncion();
     }

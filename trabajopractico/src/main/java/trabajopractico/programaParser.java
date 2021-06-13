@@ -22,8 +22,8 @@ public class programaParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, EQ=7, DOUBLE=8, WHILEF=9, 
 		IFF=10, FORR=11, INT=12, STRING=13, VOID=14, CHAR=15, FLOAT=16, COMILLAS=17, 
 		RETURN=18, PARENTESISA=19, PARENTESISC=20, LLAVEA=21, LLAVEC=22, PUNTOCOMA=23, 
-		MAS=24, MENOS=25, PRODUCTO=26, DIVISION=27, COMA=28, PALABRA=29, ENTERO=30, 
-		COMP=31, WS=32, OTRO=33;
+		MAS=24, MENOS=25, PRODUCTO=26, DIVISION=27, COMA=28, PALABRA=29, VARIABLENUMERO=30, 
+		ENTERO=31, COMP=32, WS=33, OTRO=34;
 	public static final int
 		RULE_programa = 0, RULE_instrucciones = 1, RULE_instruccion = 2, RULE_bloque = 3, 
 		RULE_iwhile = 4, RULE_iif = 5, RULE_ifor = 6, RULE_declaracionIndice = 7, 
@@ -64,8 +64,8 @@ public class programaParser extends Parser {
 			null, null, null, null, null, null, null, "EQ", "DOUBLE", "WHILEF", "IFF", 
 			"FORR", "INT", "STRING", "VOID", "CHAR", "FLOAT", "COMILLAS", "RETURN", 
 			"PARENTESISA", "PARENTESISC", "LLAVEA", "LLAVEC", "PUNTOCOMA", "MAS", 
-			"MENOS", "PRODUCTO", "DIVISION", "COMA", "PALABRA", "ENTERO", "COMP", 
-			"WS", "OTRO"
+			"MENOS", "PRODUCTO", "DIVISION", "COMA", "PALABRA", "VARIABLENUMERO", 
+			"ENTERO", "COMP", "WS", "OTRO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -2500,7 +2500,7 @@ public class programaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u0146\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3$\u0146\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2524,11 +2524,11 @@ public class programaParser extends Parser {
 		"\3 \3 \3 \3 \5 \u012d\n \3!\3!\3!\3!\3!\3!\3!\3\"\3\"\5\"\u0138\n\"\3"+
 		"#\3#\3$\3$\3$\3$\3$\3$\5$\u0142\n$\3%\3%\3%\2\2&\2\4\6\b\n\f\16\20\22"+
 		"\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFH\2\7\3\2\3\4\3\2\32\35"+
-		"\3\2\5\6\5\2\n\n\16\16\22\22\3\2\37 \2\u0145\2J\3\2\2\2\4P\3\2\2\2\6^"+
-		"\3\2\2\2\b`\3\2\2\2\nd\3\2\2\2\fj\3\2\2\2\16p\3\2\2\2\20|\3\2\2\2\22\u0090"+
-		"\3\2\2\2\24\u0092\3\2\2\2\26\u0094\3\2\2\2\30\u00a2\3\2\2\2\32\u00a4\3"+
-		"\2\2\2\34\u00b0\3\2\2\2\36\u00b2\3\2\2\2 \u00b4\3\2\2\2\"\u00b9\3\2\2"+
-		"\2$\u00c6\3\2\2\2&\u00cd\3\2\2\2(\u00cf\3\2\2\2*\u00f4\3\2\2\2,\u00f9"+
+		"\3\2\5\6\5\2\n\n\16\16\22\22\4\2\37\37!!\2\u0145\2J\3\2\2\2\4P\3\2\2\2"+
+		"\6^\3\2\2\2\b`\3\2\2\2\nd\3\2\2\2\fj\3\2\2\2\16p\3\2\2\2\20|\3\2\2\2\22"+
+		"\u0090\3\2\2\2\24\u0092\3\2\2\2\26\u0094\3\2\2\2\30\u00a2\3\2\2\2\32\u00a4"+
+		"\3\2\2\2\34\u00b0\3\2\2\2\36\u00b2\3\2\2\2 \u00b4\3\2\2\2\"\u00b9\3\2"+
+		"\2\2$\u00c6\3\2\2\2&\u00cd\3\2\2\2(\u00cf\3\2\2\2*\u00f4\3\2\2\2,\u00f9"+
 		"\3\2\2\2.\u00fb\3\2\2\2\60\u0104\3\2\2\2\62\u0108\3\2\2\2\64\u010a\3\2"+
 		"\2\2\66\u0112\3\2\2\28\u011d\3\2\2\2:\u011f\3\2\2\2<\u0121\3\2\2\2>\u012c"+
 		"\3\2\2\2@\u012e\3\2\2\2B\u0137\3\2\2\2D\u0139\3\2\2\2F\u0141\3\2\2\2H"+
@@ -2540,7 +2540,7 @@ public class programaParser extends Parser {
 		"\2_\7\3\2\2\2`a\7\27\2\2ab\5\4\3\2bc\7\30\2\2c\t\3\2\2\2de\7\13\2\2ef"+
 		"\5\60\31\2fg\5\34\17\2gh\7\26\2\2hi\5\b\5\2i\13\3\2\2\2jk\7\f\2\2kl\5"+
 		"\60\31\2lm\5\34\17\2mn\7\26\2\2no\5\b\5\2o\r\3\2\2\2pq\7\r\2\2qr\7\25"+
-		"\2\2rs\5\20\t\2st\5H%\2tu\7!\2\2uv\5H%\2vw\7\31\2\2wx\5H%\2xy\5\24\13"+
+		"\2\2rs\5\20\t\2st\5H%\2tu\7\"\2\2uv\5H%\2vw\7\31\2\2wx\5H%\2xy\5\24\13"+
 		"\2yz\7\26\2\2z{\5\b\5\2{\17\3\2\2\2|}\5\22\n\2}\21\3\2\2\2~\177\5H%\2"+
 		"\177\u0080\7\t\2\2\u0080\u0081\5H%\2\u0081\u0082\7\36\2\2\u0082\u0083"+
 		"\5\22\n\2\u0083\u0091\3\2\2\2\u0084\u0085\5H%\2\u0085\u0086\7\t\2\2\u0086"+
@@ -2554,9 +2554,9 @@ public class programaParser extends Parser {
 		"\2\u009d\u00a3\3\2\2\2\u009e\u009f\5\32\16\2\u009f\u00a0\5H%\2\u00a0\u00a3"+
 		"\3\2\2\2\u00a1\u00a3\3\2\2\2\u00a2\u009a\3\2\2\2\u00a2\u009e\3\2\2\2\u00a2"+
 		"\u00a1\3\2\2\2\u00a3\31\3\2\2\2\u00a4\u00a5\t\3\2\2\u00a5\33\3\2\2\2\u00a6"+
-		"\u00a7\5H%\2\u00a7\u00a8\7!\2\2\u00a8\u00a9\5H%\2\u00a9\u00aa\5\36\20"+
+		"\u00a7\5H%\2\u00a7\u00a8\7\"\2\2\u00a8\u00a9\5H%\2\u00a9\u00aa\5\36\20"+
 		"\2\u00aa\u00ab\5\34\17\2\u00ab\u00b1\3\2\2\2\u00ac\u00ad\5H%\2\u00ad\u00ae"+
-		"\7!\2\2\u00ae\u00af\5H%\2\u00af\u00b1\3\2\2\2\u00b0\u00a6\3\2\2\2\u00b0"+
+		"\7\"\2\2\u00ae\u00af\5H%\2\u00af\u00b1\3\2\2\2\u00b0\u00a6\3\2\2\2\u00b0"+
 		"\u00ac\3\2\2\2\u00b1\35\3\2\2\2\u00b2\u00b3\t\4\2\2\u00b3\37\3\2\2\2\u00b4"+
 		"\u00b5\5D#\2\u00b5\u00b6\5\"\22\2\u00b6!\3\2\2\2\u00b7\u00ba\5$\23\2\u00b8"+
 		"\u00ba\5&\24\2\u00b9\u00b7\3\2\2\2\u00b9\u00b8\3\2\2\2\u00ba#\3\2\2\2"+
@@ -2578,7 +2578,7 @@ public class programaParser extends Parser {
 		"\u00f5\3\2\2\2\u00ee\u00ef\7\37\2\2\u00ef\u00f0\7\7\2\2\u00f0\u00f1\5"+
 		",\27\2\u00f1\u00f2\7\b\2\2\u00f2\u00f3\7\31\2\2\u00f3\u00f5\3\2\2\2\u00f4"+
 		"\u00d2\3\2\2\2\u00f4\u00dd\3\2\2\2\u00f4\u00e7\3\2\2\2\u00f4\u00ee\3\2"+
-		"\2\2\u00f5+\3\2\2\2\u00f6\u00fa\7 \2\2\u00f7\u00fa\7\37\2\2\u00f8\u00fa"+
+		"\2\2\u00f5+\3\2\2\2\u00f6\u00fa\7!\2\2\u00f7\u00fa\7\37\2\2\u00f8\u00fa"+
 		"\3\2\2\2\u00f9\u00f6\3\2\2\2\u00f9\u00f7\3\2\2\2\u00f9\u00f8\3\2\2\2\u00fa"+
 		"-\3\2\2\2\u00fb\u00fc\5B\"\2\u00fc\u00fd\5\64\33\2\u00fd\u00fe\5\60\31"+
 		"\2\u00fe\u00ff\5\66\34\2\u00ff\u0100\5\62\32\2\u0100\u0101\7\31\2\2\u0101"+

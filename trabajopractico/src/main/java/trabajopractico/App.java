@@ -33,24 +33,6 @@ public class App {
         // parser.s();
         ParseTree tree =  parser.programa();
         System.out.println(tree);
-        System.out.println("fin del programa");
-
-        
-       // TablaSimbolos tabla = TablaSimbolos.getInstance();
-       // tabla.addContexto();
-       // MiId midi = new MiId();
-       // tabla.addId(midi);
-//
-       // MiId midi2 = new MiId();
-       // midi2.setToken("salsa");
-       // tabla.addId(midi2);
-       //
-       // MiId midi3 = new MiId();
-       // midi3.setToken("shapato");
-       // tabla.addId(midi3);
-//
-       // tabla.getTabla();
-       
-           
+        System.out.println("fin del programa");          
     }
 }

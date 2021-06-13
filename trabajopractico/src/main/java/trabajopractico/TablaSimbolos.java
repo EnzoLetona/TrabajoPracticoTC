@@ -12,10 +12,6 @@ public class TablaSimbolos {
     contextosFisicos.add(contexto);
   }
 
-  public void showContextoFisico(){ 
-    System.out.println(contextosFisicos);
-  }
-  
   public void addIdContextoFisico(MiId id,int indexContexto){ 
     contextosLogicos.get(indexContexto-1).put(id.getToken(), id);
   }
@@ -67,7 +63,7 @@ public class TablaSimbolos {
       List<MiId> idLista = new ArrayList<MiId>(contextosFisicos.get(i).values());
       System.out.println("CONTEXTO " + i);
       for(int j = 0 ; j < idLista.size(); j++){
-        System.out.println(" TOKEN:" + idLista.get(j).getToken() + " Inicializada: " + idLista.get(j).getInicializada() + " Tipo: " + idLista.get(j).getTipoDato() + " Usada: " + idLista.get(j).getUsada()+ " Funcion: " +idLista.get(j).getFuncion());
+        System.out.println(" TOKEN:" + idLista.get(j).getToken() + " - Inicializada: " + idLista.get(j).getInicializada() + " - Tipo: " + idLista.get(j).getTipoDato() + " - Usada: " + idLista.get(j).getUsada()+ " - Funcion: " +idLista.get(j).getFuncion());
       }
     }
   }

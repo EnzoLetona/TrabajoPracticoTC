@@ -11,23 +11,14 @@ public class MiListener extends programaBaseListener{
   public boolean isDeclarationFunction = false;
   public boolean isAFor = false;
   public String tipoVariableParametros;
-  public MiId miid = new MiId(); 
-  public List<String> lista = new ArrayList<String>();
-  public List<String> funcionesDeclaradas = new ArrayList<String>();
-  public List<String> parametros = new ArrayList<String>();
-  public ArrayList<Integer> cantParametros = new ArrayList<Integer>();
   public String tipoFuncion;
-  public Integer cantidad = 0;
   public int indexContextoActual = 1;
   public boolean isAsignation = false;
   public boolean error = false;
   public boolean isOperacionAritmeticaLogica = false;
   public String nombreFuncion;
   public boolean inFunction = false;
-  public List<Integer> indecesFunciones =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
-  public List<Integer> limiteInferior =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
-  public List<Integer> limiteSuperior =  new ArrayList<Integer>(); // <- se almacenan los indices en donde estan las funciones
-  public int bandera = 1;
+
   public boolean isInt(String s){
     try{ 
       int i = Integer.parseInt(s); 
@@ -35,6 +26,30 @@ public class MiListener extends programaBaseListener{
     }
     catch(NumberFormatException er){ 
       return false; 
+    }
+  }
+
+  public void searchingLogic(String ctx, int line){ 
+    MiId idLocal = new MiId();
+    MiId idLocalAux = new MiId();
+    Boolean encontrado=false;
+    idLocal.setToken(ctx);
+    for(int i =indexContextoActual ; i >= 1 ; i-- ){
+      if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
+       idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx);
+       i = 0;
+       encontrado = true;
+      }
+    }
+    if(encontrado) {
+      if(idLocalAux.getInicializada() == false){
+        error = true;
+        System.out.println("Semantic error - variable '"+ctx+"' declared but not initialize - line "+ line);
+      }
+      idLocalAux.setUsada(true);
+    }else{
+     error = true;
+     System.out.println("Semantic error - variable '"+ctx+"' not declared - in the line " + line);
     }
   }
 
@@ -46,30 +61,28 @@ public class MiListener extends programaBaseListener{
   }
   @Override public void enterAsignacion(programaParser.AsignacionContext ctx) {
     isAsignation = true; 
-   MiId idLocal = new MiId();
-   MiId idLocalAux = new MiId();
-   Boolean encontrado=false;
-   idLocal.setToken(ctx.getStart().getText());
-   for(int i =indexContextoActual ; i >= 1 ; i-- ){
-     if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
-      idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
-      i = 0;
-      encontrado = true;
-     }
-   }
-   if(encontrado) {
-    idLocalAux.setUsada(true);
-    idLocalAux.setInicializada(true);
-   }else{
-    error = true;
-    System.out.println("Semantic error (asignation) - variable '"+ctx.getStart().getText()+"' is not declared - in the line " + ctx.getStart().getLine());
-   }
-  
+    MiId idLocal = new MiId();
+    MiId idLocalAux = new MiId();
+    Boolean encontrado=false;
+    idLocal.setToken(ctx.getStart().getText());
+    for(int i =indexContextoActual ; i >= 1 ; i-- ){
+      if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
+       idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
+       i = 0;
+       encontrado = true;
+      }
+    }
+    if(encontrado) {
+     idLocalAux.setUsada(true);
+     idLocalAux.setInicializada(true);
+    }else{
+     error = true;
+     System.out.println("Semantic error (asignation) - variable '"+ctx.getStart().getText()+"' is not declared - in the line " + ctx.getStart().getLine());
+    }
   }
 
   @Override public void exitAsignacion(programaParser.AsignacionContext ctx) { 
     isAsignation = false;
-    
     sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
 
@@ -88,11 +101,9 @@ public class MiListener extends programaBaseListener{
     boolean addIDStatus;
     if(tipoVariable.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
     if(tipoVariable.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
-
-    //idLocal.Token = ctx.getStart().getText();
+    if(tipoVariable.equals("float")) idLocal.setTipoDato(TipoDato.FLOAT);
     idLocal.setToken( ctx.getStart().getText());
     idLocal.setInicializada(true);
-  
     addIDStatus = TablaSimbolos.getInstance().addId(idLocal,indexContextoActual);
     if(!addIDStatus) error = true; 
   }
@@ -102,11 +113,11 @@ public class MiListener extends programaBaseListener{
   }
 
   @Override public void enterDeclararSinDef(programaParser.DeclararSinDefContext ctx) { 
-    System.out.println("entreeeeee");
     MiId idLocal = new MiId();
     boolean addIDStatus;
     if(tipoVariable.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
     if(tipoVariable.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
+    if(tipoVariable.equals("float")) idLocal.setTipoDato(TipoDato.FLOAT);
     idLocal.setToken( ctx.getStart().getText());
     idLocal.setInicializada(false);
     addIDStatus = TablaSimbolos.getInstance().addId(idLocal,indexContextoActual); 
@@ -114,7 +125,6 @@ public class MiListener extends programaBaseListener{
   }
   
   @Override public void exitDeclararSinDef(programaParser.DeclararSinDefContext ctx) { 
-    System.out.println("saliiiiii");
     sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
 
@@ -147,91 +157,29 @@ public class MiListener extends programaBaseListener{
 
     if (isDeclaration){
       if(tipoVariable.equals("int")){
-        if (!isInt(ctx.getStart().getText())) System.out.println("La variable es de tipo entero y chantaste cualquiera");
-      }
-      if(tipoVariable.equals("double")){
-        if (!isInt(ctx.getStart().getText())) System.out.println("La variable es de tipo entero y chantaste cualquiera");
+        if (!isInt(ctx.getStart().getText())) System.out.println("wrong asignation - expected 'int'");
       }
     }
 
     if(isAFor){
       if(!isInt(ctx.getStart().getText())){
-        MiId idLocal = new MiId();
-        MiId idLocalAux = new MiId();
-        Boolean encontrado=false;
-        idLocal.setToken(ctx.getStart().getText());
-        for(int i =indexContextoActual ; i >= 1 ; i-- ){
-          if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
-           idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
-           i = 0;
-           encontrado = true;
-          }
-        }
-        if(encontrado) {
-          idLocalAux.setUsada(true);
-          if(idLocalAux.getInicializada() == false){
-            error = true;
-            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
-          }
-          idLocalAux.setUsada(true);
-        }else{
-         error = true;
-         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line "+ ctx.getStart().getLine());
-        }
+        searchingLogic(ctx.getStart().getText(),ctx.getStart().getLine());
       }
     }
 
     if(isOperacionAritmeticaLogica){
       if(!isInt(ctx.getStart().getText())){
-        MiId idLocal = new MiId();
-        MiId idLocalAux = new MiId();
-        Boolean encontrado=false;
-        idLocal.setToken(ctx.getStart().getText());
-        for(int i =indexContextoActual ; i >= 1 ; i-- ){
-          if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
-           idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
-           i = 0;
-           encontrado = true;
-          }
-        }
-        if(encontrado) {
-          if(idLocalAux.getInicializada() == false){
-            error = true;
-            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
-          }
-          idLocalAux.setUsada(true);
-        }else{
-         error = true;
-         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line " + ctx.getStart().getLine());
-        }
+        searchingLogic(ctx.getStart().getText(),ctx.getStart().getLine());
       }
     }
     if(isAsignation){
       if(!isInt(ctx.getStart().getText())){
-        MiId idLocal = new MiId();
-        MiId idLocalAux = new MiId();
-        Boolean encontrado=false;
-        idLocal.setToken(ctx.getStart().getText());
-        for(int i =indexContextoActual ; i >= 1 ; i-- ){
-          if (TablaSimbolos.getInstance().buscarIdLocal(idLocal,i)){
-           idLocalAux = TablaSimbolos.getInstance().obtenerId(i,ctx.getStart().getText());
-           i = 0;
-           encontrado = true;
-          }
-        }
-        if(encontrado) {
-          idLocalAux.setUsada(true);
-          if(idLocalAux.getInicializada() == false){
-            error = true;
-            System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' declared but not initialize - line "+ ctx.getStart().getLine());
-          }
-        }else{
-         error = true;
-         System.out.println("Semantic error - variable '"+ctx.getStart().getText()+"' not declared - in the line " + ctx.getStart().getLine());
-        }
+        searchingLogic(ctx.getStart().getText(),ctx.getStart().getLine());
       }
     }
   }
+
+  
 
   @Override public void enterBloque(programaParser.BloqueContext ctx) {
     if(comeParameters == false){
@@ -245,23 +193,20 @@ public class MiListener extends programaBaseListener{
     
   }
   @Override public void exitBloque(programaParser.BloqueContext ctx) {
-   Set<String> oneContext =  TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet();
-   if(oneContext.size() != 0){
-     MiId idAuxiliar = new MiId();
-     String searchingToken;
-     for(int i = 0 ; i < oneContext.size() ; i++){
-      searchingToken = oneContext.toArray(new String[0])[i];
-      idAuxiliar=TablaSimbolos.getInstance().obtenerId(indexContextoActual,searchingToken);
-      if(idAuxiliar.getUsada()==false){
-        System.out.println("Semantic error - declared but not used '"+idAuxiliar.getToken()+"' - in the line "+ctx.getStart().getLine());
-        error=true;
+    Set<String> oneContext =  TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet();
+    if(oneContext.size() != 0){
+      MiId idAuxiliar = new MiId();
+      String searchingToken;
+      for(int i = 0 ; i < oneContext.size() ; i++){
+        searchingToken = oneContext.toArray(new String[0])[i];
+        idAuxiliar=TablaSimbolos.getInstance().obtenerId(indexContextoActual,searchingToken);
+        if(idAuxiliar.getUsada()==false){
+          System.out.println("Semantic error - declared but not used '"+idAuxiliar.getToken()+"' - in the line "+ctx.getStart().getLine());
+          error=true;
+        }
       }
-     }
-   }
-   TablaSimbolos.getInstance().addContextoFisico(TablaSimbolos.getInstance().obtenerContexto(indexContextoActual));
-
-    //System.out.println (" |||"+ TablaSimbolos.getInstance().obtenerContexto(indexContextoActual).keySet().size());
-
+    }
+    TablaSimbolos.getInstance().addContextoFisico(TablaSimbolos.getInstance().obtenerContexto(indexContextoActual));
     indexContextoActual -= 1; 
     TablaSimbolos.getInstance().removeLastContexto(); 
   }
@@ -301,25 +246,18 @@ public class MiListener extends programaBaseListener{
       }
     }
     else{
-      Boolean repeat;
       if(!TablaSimbolos.getInstance().addId(idLocal,1)){
         error = true;
-      }                                             //posible cambio
+      }                                             
     }
     
   }
 
   @Override public void enterDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx) { 
     this.inFunction = true;
-    limiteInferior.add(bandera+1);
-    //System.out.println(" rarara "+ctx.getStart().getText());
-    //isOperacionAritmeticaLogica = true;
   }
   @Override public void exitDefinicionFunciones(programaParser.DefinicionFuncionesContext ctx) { 
     this.indexContextoActual = 1;
-    limiteSuperior.add(bandera);
-    //System.out.println(" rarara "+ctx.getStart().getText());
-    //isOperacionAritmeticaLogica = true;
   }
 
   @Override public void enterParametros(programaParser.ParametrosContext ctx) { 
@@ -335,6 +273,8 @@ public class MiListener extends programaBaseListener{
     idLocal.setToken(ctx.getStart().getText());
     if(tipoVariableParametros.equals("int")) idLocal.setTipoDato(TipoDato.INT); 
     if(tipoVariableParametros.equals("double")) idLocal.setTipoDato(TipoDato.DOUBLE);
+    if(tipoVariableParametros.equals("float")) idLocal.setTipoDato(TipoDato.FLOAT);
+
     idLocal.setInicializada(true);
     TablaSimbolos.getInstance().addId(idLocal, indexContextoActual);
   }
@@ -359,11 +299,9 @@ public class MiListener extends programaBaseListener{
   }
   
   @Override public void exitLlamadoFuncion(programaParser.LlamadoFuncionContext ctx) {
-    System.out.println("Entro aca"); 
     sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
   
-
   @Override public void enterDeclaracionfuncion(programaParser.DeclaracionfuncionContext ctx) { 
     isDeclarationFunction= true;
   }
@@ -403,8 +341,5 @@ public class MiListener extends programaBaseListener{
   @Override public void exitIfor(programaParser.IforContext ctx) { 
     isAFor = false;
   }
-  
-  
-  
   
 }

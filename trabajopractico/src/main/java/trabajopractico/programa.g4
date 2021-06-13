@@ -29,6 +29,7 @@ PRODUCTO:'*';
 DIVISION:'/';
 COMA: ',';
 PALABRA : LETRA2+;
+VARIABLENUMERO : LETRA2+ DIGITO+;
 ENTERO : DIGITO+ ;
 COMP : ('<'|'<='|'=='|'>'|'>=' |'!=');
 WS : [ \t\r\n]+ -> skip;
@@ -168,6 +169,3 @@ returnss: RETURN variable PUNTOCOMA
 variable: PALABRA
         | ENTERO
         ;
-
-
-
