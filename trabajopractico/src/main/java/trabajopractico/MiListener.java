@@ -127,6 +127,9 @@ public class MiListener extends programaBaseListener{
   @Override public void exitDeclararSinDef(programaParser.DeclararSinDefContext ctx) { 
     sintacticControlPyC(ctx.getStop().getText(),ctx.getStop().getLine());
   }
+  @Override public void enterPrograma(programaParser.ProgramaContext ctx) {
+    TablaSimbolos.getInstance().addContexto();
+  }
 
 
   @Override public void exitPrograma(programaParser.ProgramaContext ctx) {

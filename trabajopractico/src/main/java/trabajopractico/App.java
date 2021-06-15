@@ -8,7 +8,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Inicio del programa");
-        TablaSimbolos.getInstance().addContexto();
         
         // create a CharStream that reads from file
         CharStream input = CharStreams.fromFileName("trabajopractico/src/programa.txt");
@@ -32,7 +31,9 @@ public class App {
         // En este caso la regla es el simbolo inicial
         // parser.s();
         ParseTree tree =  parser.programa();
-        System.out.println(tree);
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println(tree.toStringTree(parser)); <- descomentar para ver el arbol
         System.out.println("fin del programa");          
     }
 }

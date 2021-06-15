@@ -6,7 +6,7 @@ int main(){
   float resultado;
   int hola=5;
   int aux;
-  resultado = num + 5;
+  resultado = resultado + num;
   { 
     if( global< 4){
       otrafuncion();
