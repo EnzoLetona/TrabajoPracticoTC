@@ -1,29 +1,39 @@
-int pruebaa(int);
+int Sumar(int,int);
 int otrafuncion(int);
 int global=1;
 int main(){
-  int num=1;
-  int forrr=4;
+  int num=1,forrr;
   float resultado;
   int hola=5;
-  pruebaa();
+  int aux;
   resultado = num + 5;
   { 
     if( global< 4){
       otrafuncion();
+      aux = 5;
+      if (aux != 3) {
+        int resul;
+        resul = 3;
+      }
     }
+    forrr = 4;
     for(forrr = 4 ; hola < 5 ; hola ++){
-      otrafuncion();
+      otrafuncion(hola);
+    }
+    while(hola < 145){
+      Sumar(num,forrr);
     }
   }
 }
 
-int pruebaa(int nn, int nnnn, int nnnnn){
-  nnnn = nn + nnnnn;
+int Sumar(int num, int numm){
+  int resultado;
+  resultado = num + numm;
+  return resultado;
 }
 
 
-int otrafuncion(int nn, int nnnn, int nnnnn){
+void otrafuncion(int nn, int nnnn, int nnnnn){
   nnnn = nn + nnnnn;
 }
 
